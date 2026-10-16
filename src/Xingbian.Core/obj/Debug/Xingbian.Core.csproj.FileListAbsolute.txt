@@ -1,0 +1,9 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Core\bin\Debug\Xingbian.Core.dll
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Core\bin\Debug\Xingbian.Core.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Core\obj\Debug\Xingbian.Core.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Core\obj\Debug\Xingbian.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Core\obj\Debug\Xingbian.Core.AssemblyInfoInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Core\obj\Debug\Xingbian.Core.AssemblyInfo.cs
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Core\obj\Debug\Xingbian.Core.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Core\obj\Debug\Xingbian.Core.dll
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Core\obj\Debug\Xingbian.Core.pdb

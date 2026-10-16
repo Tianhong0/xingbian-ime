@@ -1,0 +1,83 @@
+﻿=== PanelVerify ===
+time: 2026-10-16 16:47:23
+exe: D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\bin\Release\PanelVerify.exe
+screen DPI (LOGPIXELSY) = 96
+virtual screen = (-1920,-201) .. (3640,1719)
+foreground hwnd before = 0x1906B4
+
+--- 1. RegisterWindowClass 幂等 ---
+  [PASS] RegisterWindowClass x3 no-throw  |  LastError=0
+
+--- 2. Show #1 @ (200,200) selected=0 ---
+  [PASS] Show #1 does not throw
+  hwnd = 0x250846   LastError=0
+  [PASS] hwnd created
+  [PASS] IsVisible == true  |  IsVisible=True
+  style   = 0x94000000   (WS_POPUP=0x80000000)
+  exStyle = 0x08000088
+  [PASS] WS_POPUP set  |  style=0x94000000
+  [PASS] WS_EX_TOOLWINDOW set
+  [PASS] WS_EX_TOPMOST set
+  [PASS] WS_EX_NOACTIVATE set
+  [PASS] no WS_EX_APPWINDOW (won't show in taskbar)
+  [PASS] WM_NCHITTEST -> HTTRANSPARENT  |  got -1
+  [PASS] WM_MOUSEACTIVATE -> MA_NOACTIVATE  |  got 3
+  [PASS] foreground window unchanged after Show  |  before=0x1906B4 after=0x1906B4
+  window rect = (202,202)-(333,323)  size=131x121
+  [PASS] panel height sane (30..600)  |  h=121
+  [PASS] panel width sane (60..1200)  |  w=131
+  [PASS] anchored near (200+2, 200+2)  |  left=202 top=202
+  realized font face = Microsoft YaHei UI
+
+--- 3. 截图 shot1.png ---
+  saved D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\shot1.png  (131x121, 2509 bytes, distinct sampled colors=45)
+
+--- 4. Show #2 @ (620,430) selected=2 ---
+  [PASS] Show #2 does not throw
+  IsVisible=True
+  window rect = (622,432)-(753,553)
+  [PASS] moved to new anchor (622,432)  |  left=622 top=432
+  saved D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\shot2.png  (131x121, 2537 bytes, distinct sampled colors=46)
+
+--- 5. 无状态行（statusText = null）应更矮 ---
+  with status=121px  without status=92px
+  [PASS] null statusText makes panel shorter  |  121 -> 92
+
+--- 6. 脏输入（全部不得抛异常）---
+  [PASS] labels=null no-throw  |   IsVisible=False
+  [PASS] labels=空数组 no-throw  |   IsVisible=False
+  [PASS] selectedIndex=999 no-throw
+  [PASS] selectedIndex=-5 no-throw
+  [PASS] notes=null no-throw
+  [PASS] notes 比 labels 短 no-throw
+  [PASS] labels 含 null 元素 no-throw
+  [PASS] 全部 note 为空（右列应消失） no-throw
+  [PASS] statusText=空串 no-throw
+
+--- 7. 定位：翻转 + 多显示器工作区钳制 ---
+  anchor(1900,1050) -> rect (1902,1052)-(2033,1173)  work (0,0)-(2560,1440)  fullyInside=True
+  [PASS] anchor(1900,1050) fully inside work area
+  anchor(-1919,-200) -> rect (-1917,0)-(-1786,121)  work (-1920,0)-(0,1080)  fullyInside=True
+  [PASS] anchor(-1919,-200) fully inside work area
+  anchor(3630,1710) -> rect (3497,1587)-(3628,1708)  work (2560,-201)-(3640,1719)  fullyInside=True
+  [PASS] anchor(3630,1710) fully inside work area
+  anchor(-1900,1700) -> rect (-1898,959)-(-1767,1080)  work (-1920,0)-(0,1080)  fullyInside=True
+  [PASS] anchor(-1900,1700) fully inside work area
+  anchor(960,540) -> rect (962,542)-(1093,663)  work (0,0)-(2560,1440)  fullyInside=True
+  [PASS] anchor(960,540) fully inside work area
+
+--- 8. GDI / USER 句柄泄漏检查（200 次 Show）---
+  before: GDI=13 USER=7
+  after : GDI=13 USER=7
+  [PASS] no GDI handle growth over 200 shows  |  13 -> 13
+  [PASS] no USER handle growth over 200 shows  |  7 -> 7
+
+--- 9. Hide / Dispose ---
+  [PASS] Hide() -> IsVisible == false
+  [PASS] Hide() idempotent
+  [PASS] Dispose x3 does not throw
+  [PASS] calls after Dispose do not throw (no-op)
+  [PASS] IsVisible == false after Dispose
+  GDI after dispose = 9  (baseline 13)
+
+=== RESULT: ALL PASS ===

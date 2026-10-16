@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    逐槽验证【真实交付物】Xingbian.Tsf.dll 的 CCW vtable。
+
+    为什么要单独建工程，而不是复用 scratch\vtable（ProbeFix2）：
+    ProbeFix2 里面的是三份"形状样机"（ImplA/ImplB/ImplC），验证的是"哪种写法对"。
+    本工程直接引用 ..\..\src\Xingbian.Tsf\bin\Release\Xingbian.Tsf.dll，
+    用交付物自己声明的 Interop.ITfTextInputProcessorEx 去 QI 交付物自己的 TextService，
+    验证的是"交付物现在对不对" —— 副本通过而原件失败是这类问题最典型的翻车方式。
+
+    用法（每个槽一个进程，崩了就崩了，退出码即结论）：
+      RealVtable.exe introspect          只读槽位指针，不调用
+      RealVtable.exe call e 5            调 Ex 的槽 5（期望 = ActivateEx）
+      RealVtable.exe call b 3            调 Base 的槽 3（期望 = Activate）
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>RealVtable</AssemblyName>
+    <RootNamespace>RealVtableProbe</RootNamespace>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <Deterministic>true</Deterministic>
+    <NoWarn>$(NoWarn);CS1591;MSB3270</NoWarn>
+    <!-- 本工程刻意不继承仓库根的 Directory.Build.props 的 PackageReference 路径假设之外的东西 -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Xingbian.Tsf">
+      <HintPath>..\..\src\Xingbian.Tsf\bin\Release\Xingbian.Tsf.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Xingbian.Core">
+      <HintPath>..\..\src\Xingbian.Tsf\bin\Release\Xingbian.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

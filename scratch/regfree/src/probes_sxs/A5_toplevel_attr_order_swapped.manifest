@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity type="win32" name="Xingbian.RegFree.Probe" version="1.0.0.0"
+                    processorArchitecture="amd64" />
+  <file name="Xingbian.Tsf.dll" />
+  <clrClass name="Xingbian.Tsf.TextService, Xingbian.Tsf, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null" clsid="{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}"
+            runtimeVersion="v4.0.30319" threadingModel="Both" />
+</assembly>

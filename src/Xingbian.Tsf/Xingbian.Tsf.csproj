@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Xingbian.Tsf</AssemblyName>
+    <RootNamespace>Xingbian.Tsf</RootNamespace>
+    <!-- 由我们自己生成的 install/register.ps1 注册，不用 MSBuild 的 Regasm 钩子 -->
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <!-- 32/64 位宿主都要能用：本工程只产出 x64（见 Directory.Build.props） -->
+    <EnableComHosting>false</EnableComHosting>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Xingbian.Core\Xingbian.Core.csproj" />
+  </ItemGroup>
+
+</Project>

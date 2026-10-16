@@ -1,0 +1,8 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable\bin\Release\ProbeFix2.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable\bin\Release\ProbeFix2.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable\bin\Release\ProbeFix2.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable\obj\Release\ProbeFix2.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable\obj\Release\ProbeFix2.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable\obj\Release\ProbeFix2.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable\obj\Release\ProbeFix2.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable\obj\Release\ProbeFix2.pdb

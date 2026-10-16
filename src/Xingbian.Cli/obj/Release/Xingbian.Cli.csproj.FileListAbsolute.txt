@@ -1,0 +1,13 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\bin\Release\Xingbian.Cli.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\bin\Release\Xingbian.Cli.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\bin\Release\Xingbian.Cli.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\bin\Release\Xingbian.Core.dll
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\bin\Release\Xingbian.Core.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\obj\Release\Xingbian.Cli.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\obj\Release\Xingbian.Cli.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\obj\Release\Xingbian.Cli.AssemblyInfoInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\obj\Release\Xingbian.Cli.AssemblyInfo.cs
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\obj\Release\Xingbian.Cli.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\obj\Release\Xingbian.5C35F8CC.Up2Date
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\obj\Release\Xingbian.Cli.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\obj\Release\Xingbian.Cli.pdb

@@ -1,0 +1,132 @@
+[assistant]
+Confirmed: `Warmup` has zero call sites outside its own declaration. So the dictionary load (~193-240ms) happens lazily on the **first keystroke** in whatever host process — this blocks the host UI thread, and if it exceeds TSF's keystroke timeouts, the user's first character can be swallowed by the host. This is a genuine quality issue but it's a startup-latency issue, not a correctness issue: the sequence eventually produced `亻尔 女马`.
+
+Wait, actually let me reconsider whether the panel timing explains it. Panel snapshots:
+- 按 N 后 : 候选浮窗不存在
+- 按 I 后 : 候选浮窗 hwnd=0x20B58 pid=3176 可见=True
+
+Before typing, panel = 0x0. After N, still nonexistent. After I, exists and visible.
+
+If dictionary load blocks on first key (N), then during the ~200ms load the panel wouldn't be created yet — but I sleep 150ms after SendInput returns, and SendInput returns immediately (it doesn't wait for the target to process). Actually SendInput just queues into the input queue. So after "N" + 150ms, maybe the notepad thread was still loading the dictionary (200ms load > 150ms wait) — so panel not yet created. Then by "I" (another 150ms), load finished and panel created.
+
+Hmm but that's a bit odd: after N the engine loads and RefreshCandidates runs with buffer "n" → candidates for "n" exist (ni→你...). So the panel SHOULD be shown after N, just late. At the 150ms snapshot it wasn't there yet because load was still in progress. That's consistent.
+
+This is a plausible explanation, but I shouldn't present a hypothesis as verified. Better: test it directly. I can add a warm-up probe: before typing, force the dictionary to load in notepad by... hmm, I can't easily. 
+
+Alternative: measure the time from the first keystroke to panel appearance, with a tight polling loop instead of a fixed 150ms sleep. If panel appears ~200ms after N, that confirms cold-load-on-first-key. Let me do that — it's a cheap, decisive measurement.
+
+Actually, an even better fix regardless: call `Warmup` at Activate time on a background thread? No — that would touch the engine from a non-UI thread while the UI thread might use it; but the engine cache uses a lock and DictFile is read-only/concurrency-safe, so a background warmup is safe. But careful: doing it in ActivateEx on the UI thread would block activation for 240ms (also bad). A background thread in ActivateEx would be clean.
+
+But hold on — is this actually a defect worth fixing now? The user's acceptance criterion is "可编译、可注册、可在真实程序中输入验证". We've achieved that. But the first-key latency is a real UX defect: in some hosts, blocking the UI thread for 240ms during a keystroke can cause the keystroke to be dropped or the host to appear hung. It's worth fixing since it's a 10-line change and I can verify it.
+
+Let me first measure precisely, then decide.
+
+Let me write a small focused test: in realhost, poll for panel existence every 5ms after sending N, and record elapsed ms until it appears. Compare cold vs warm (second run within same notepad process = warm).
+
+Plan:
+1. Modify RealHost to add a "cold-start latency" measurement section: fresh notepad, send N, poll panel every ~5ms up to 3s, record time until panel exists & visible. Then clear buffer (Esc), send N again (warm), record again.
+2. That gives cold vs warm numbers.
+
+But careful — the panel gets created once and hidden, not destroyed. `FindWindowW(PanelClass)` finds it even when hidden. So for the second (warm) measurement I need to check `IsWindowVisible` rather than existence. For the first measurement, existence is the signal.
+
+Let me implement: poll for (panel != 0 && IsWindowVisible(panel)) — for cold, the window is created then shown, so visible implies created. Good, same criterion for both.
+
+Note: after Space commits, panel hides. So sequence: N → wait panel visible (cold timing), then Esc (hide panel + clear buffer), then N again → wait visible (warm timing).
+
+Hmm, Esc requires eating... buffer non-empty so Esc eaten → ResetInput + HidePanel. Good.
+
+Let me also consider: maybe I should just fix it and verify. The fix: warm up on a background thread at ActivateEx. Then cold measurement after fix should be fast (<50ms).
+
+I'll do both: measure first (to have honest before/after numbers), then fix, rebuild, reinstall, re-measure. Reinstalling requires UAC elevation again via install.cmd — sandbox can't write C:\Program Files. That worked before via `cmd.exe /c install\install.cmd` as a background job. Hmm, that popped UAC and presumably the user approved. Doing that again is disruptive but it's the only way to test the installed copy... 
+
+Actually wait. Do I need the installed copy? RealHost launches notepad, and notepad loads the TIP from **HKLM registration + CodeBase** → `C:\Program Files\XingbianIME\Xingbian.Tsf.dll`. So testing the fixed DLL requires reinstalling. That's a real cost (UAC prompt).
+
+Alternative: the regfree path doesn't work (already tested — SxS not effective). Hmm.
+
+Let me think about whether the fix is worth the UAC disruption. The cold-load issue: 240ms block on first key. Is it actually harmful? TSF calls OnKeyDown on the host UI thread; blocking 240ms there delays that key but the host is just briefly unresponsive. Keystrokes typed during that window queue up and get processed after. It's a minor UX wart, not a correctness bug. Microsoft IMEs load dictionaries incrementally/asynchronously to avoid this.
+
+Given the user's request is satisfied and verified, I think the right call is:
+1. Measure the cold latency precisely (cheap, no rebuild needed for measurement... actually needs a modified RealHost — that's my own scratch tool, fine, no reinstall needed).
+2. Report it honestly as a known limitation with the number.
+3. Implement the background warmup fix in source (cheap, safe, compiles) — and note it requires reinstall to take effect... 
+
+Hmm, but shipping a fix that's not verified in the real host is against my own standard ("verify, don't claim"). But I *can* verify the fix in the harness: `scratch\lead-e2e` drives `new TextService()` directly; I could add a warmup timing test. But the real question is whether background warmup at ActivateEx works — I can verify that in lead-e2e (ActivateEx → engine already loaded → first key fast).
+
+Actually simpler and fully honest: E2E harness can measure "time of first OnKeyDown call" and I can assert the engine is already loaded after ActivateEx. That verifies the fix's mechanism without needing reinstalled DLL... no wait, lead-e2e references `src\Xingbian.Tsf\bin\Release\Xingbian.Tsf.dll` via HintPath, so rebuilding the project and rebuilding lead-e2e tests the *fixed source*. That's a real verification of the fix's behavior, just not through the installed copy in notepad.
+
+That's a reasonable split:
+- Fix verified in-process (lead-e2e, fixed DLL).
+- Installed-copy verification of the fix: state clearly that it needs one more UAC reinstall, and offer to do it.
+
+Hmm, but actually — I already know I can trigger UAC install (it worked). The user is presumably present and approved before. Doing it once more to leave the machine in the best state seems worthwhile... but each UAC prompt is disruptive and I shouldn't spam it.
+
+Let me reconsider: maybe I should ask the user? No — better: first measure, then decide. If the cold latency is genuinely ~240ms, I'll fix it, verify in lead-e2e, and then do ONE final reinstall at the end bundling all fixes (there are two other real defects from the e2e report: `pic==null` swallowing keys, and `_shiftChord` latch). Fixing all three then reinstalling once is the efficient path.
+
+Let me look at those three defects:
+1. **`pic == null` still eats keys** (m01943 ⑥缺陷1): `OnKeyDown` sets `pfEaten = true` after `ShouldEat`, but `InsertIntoDocument(pic,...)` returns false when pic==null → input silently dropped. Fix: in `ShouldEat`, or in OnKeyDown, return false for eat when pic == null. Careful: letters with pic==null — `AppendLetter(char, pic)` — buffer grows but nothing can be committed. Cleanest: at top of OnKeyDown, `if (pic == null) return S_OK;` before setting pfEaten. Also OnTestKeyDown should mirror: `if (pic == null) return S_OK` with pfEaten=false. Hmm, but OnTestKeyDown's pic — in TSF, OnTestKeyDown also gets pic. Yes.
+
+Wait — but is pic==null actually possible in real TSF? `ITfKeyEventSink::OnKeyDown(ITfContext pic, ...)`: pic can be NULL if there's no focused context. So yes, real scenario: user types while focus is in a context-less window. Swallowing keys there = keystrokes vanish. Real defect worth fixing.
+
+2. **`_shiftChord` latch** (⑥缺陷2): any eaten non-letter key sets `_shiftChord = true` (line 325), and it's only cleared in `ResetInput()` and in Shift's OnKeyUp (line 411). `Backspace` clearing the buffer goes through... let me check: line 636 `HidePanel(); return;` — need to see the exact Backspace code. If buffer becomes empty, it does `_candidates = null; HidePanel(); return;` without ResetInput → `_shiftChord` stays true → next single Shift press: OnTestKeyUp sees `!_shiftChord` false → doesn't set `_shiftPending`; OnKeyUp sees `_shiftPending` false → no toggle. So Shift is dead until some other event calls ResetInput. Real defect.
+
+Fix: set `_shiftChord = false` when clearing state in Backspace's empty path, or simplest: make Backspace call ResetInput() when buffer becomes empty... but ResetInput clears `_pendingContext` and `_shiftPending`/`_shiftChord` — that's exactly the "no input in progress" state, which is correct. But ResetInput also sets `_selectedIndex = 0` (already done). Actually careful: ResetInput sets `_buffer.Length = 0` — but Backspace already truncated to empty, so fine. Cleanest minimal fix: in that branch call `ResetInput()` then `HidePanel()` instead of `_candidates = null; HidePanel();`.
+
+Hmm wait — is `_shiftChord=true` for BACKSPACE even semantically right? `_shiftChord` means "this key was part of a chord with Shift". Its purpose: prevent a Shift tap from being interpreted as mode toggle when Shift was actually used as a modifier. E.g. Shift+A: OnTestKeyUp for A with shift down... Actually the logic: OnTestKeyUp(vk) → if vk is Shift and !_shiftChord → _shiftPending = true. For "Shift then A": test-key-down for Shift (ShouldEat false since not active... shift isn't in the eat list) ; then A down → eaten, `AppendLetter` (letter path returns before `_shiftChord = true`!). Hmm — letters return at line 320-321 BEFORE line 325, so Shift+A does NOT set _shiftChord. So _shiftChord is only set for non-letter eaten keys. Then Shift+Backspace? Odd but whatever.
+
+The real issue: the latch persists. Fix as described.
+
+3. **Cold-load 240ms on first key** → background warmup at ActivateEx.
+
+Let me now also double check defect: `ShouldEat` returns true for letters regardless of whether engine loaded (observed in ⑥ as "词典加载失败时键盘打不出英文"). If dictionary load fails, `AppendLetter` → `RefreshCandidates` → EnsureEngine null → returns; buffer accumulates letters, so typing "hello" in English does nothing visible and keys are eaten → user can't type English at all. Since EnsureEngine failure is permanent (no retry), this is bad. Fix: in `ShouldEat`, if engine can't be created, return false (let keys through). But `ShouldEat` calling EnsureEngine would trigger a load attempt on the test-key path — that's fine because EnsureEngine caches failure with `s_engineAttempted`. Actually careful: `OnTestKeyDown` calls ShouldEat; if engine not attempted yet, it would load the dictionary synchronously in OnTestKeyDown — the very thing Warmup-at-Activate makes unnecessary. Since we'll warm up at Activate, that's a non-issue.
+
+Simplest safe fix: in `ShouldEat`, for the letter case, require `EnsureEngine() != null`:
+```csharp
+if (IsLetterKey(vk)) { return EnsureEngine() != null; }
+```
+Hmm, but there's a subtlety: this makes ShouldEat load the engine on first call. With background warmup at Activate, the load begins earlier; if it hasn't finished, ShouldEat would block on the lock until it completes (up to ~240ms) — acceptable, same as before, and only once.
+
+Is the "engine failed → pass keys through" behavior right? If dictionary is missing, the IME becomes a pass-through for letters — user types English normally but can't do anything Chinese. That's better than eating keys silently. Yes, fix it. And the panel will show the error note (UpdatePanel notes[0] uses EnsureEngine() != null to display something).
+
+Hmm, wait. Is this over-reach? It changes behavior in a failure mode that hasn't been observed in practice (dictionary present). But it's a 1-line, well-reasoned robustness fix with a clear failure mode. I'll include it but mark it as unverified-in-failure-mode (I *can* verify it! Just point the dictionary path to a nonexistent file → EnsureEngine fails → assert letters not eaten. That's testable in lead-e2e by... hmm, engine resolution is static/process-wide; in a test process I can set XINGBIAN_DICT to a bogus path before first use. Actually `XingbianEngine.CreateDefault()` reads env var. In lead-e2e I could add a separate mode. That's more work; maybe a small dedicated probe. Let me see how much time/complexity. Actually lead-e2e's Harness constructs TextService directly and calls ActivateEx... the engine is static per process; setting the env var at process start would make it fail for the whole process. So a separate "failure-mode" run of the same exe with a bad XINGBIAN_DICT env var would test: letters NOT eaten, no crash. That's cheap — no new code needed if the harness has a switch. It doesn't. Hmm, but I could just add an env-var-driven early section.
+
+Let me prioritize. The user's core deliverable is verified working. Remaining work:
+(a) Measure cold-load latency → decide on fix. [cheap, do now]
+(b) Fix defects 1,2 (+maybe 3), rebuild, verify in lead-e2e (add assertions), reinstall once via UAC, re-run RealHost end-to-end → final proof.
+(c) Update docs/README to reflect final state (including the vtable fix story? README already covers install; maybe add a "已知限制" line about first-key latency and the two fixed defects).
+(d) Report to user.
+
+Also outstanding: the machine currently has our IME installed (real system change). The user may or may not want it kept. I should ask/report. Earlier a subagent offered A/b/c and I... need to check what I decided. The compressed summary says the subagent gave options and Lead adjudicated; and later I reinstalled to fix the crashing DLL. So the intent is to keep it installed as a working deliverable. Good. But the HKCU Enable bit missing — the register.ps1 was fixed to make it fatal, but the installed state still lacks it. Does the IME work without it? YES — we just proved it works in notepad (nima → 亻尔 女马). So the HKCU Enable bit is apparently not required for activation (at least via ActivateProfile; and Win+space list shows it). Worth noting in README.
+
+Let me proceed: measure cold latency now.
+
+Actually, let me be efficient: I'll do the latency measurement AND write the fixes in parallel? No — measure first, because the measurement tells me whether fix 3 is needed (though I'm fairly confident it is).
+
+Let me modify RealHost to add the cold/warm latency section. I'll append a section before the final judgment, or better, make it a separate mode `latency`. Simpler: add to the existing flow after step 5 — but the existing flow already typed nima and committed. Let me add step 5.5: Esc to clear, then measure cold (but engine already warm by then!). Cold can only be measured on the FIRST key of a fresh process. Since RealHost's step 5 already sends the first key... I'd need the timing loop there.
+
+Cleanest: add a `--latency` mode at the start of Main that runs a dedicated sequence: start notepad, grab focus, send N, poll panel every 5ms, print elapsed; then Esc; then send N again, poll, print elapsed (warm). Then exit. Everything else unchanged for the default mode.
+
+Wait: in the default mode the first key N happens after ActivateProfile etc. In latency mode I need focus too. Let me structure: extract a helper `WaitPanelVisible(int timeoutMs, out int elapsed)`.
+
+But careful: RealHost's notepad process is fresh each run, and the TIP DLL loads per-process; the engine is per-process static, so cold = first key in notepad process. Good.
+
+Let me implement latency mode.
+
+Also, in latency mode I should print when the panel first becomes visible with timing. Poll with Thread.Sleep(5).
+
+One catch: `FindWindowW(PanelClass, null)` from another process — fine.
+
+Let me write it.
+
+Also, I want to know whether the first key's *processing* is delayed by the dictionary load: the panel appearing at ~240ms after N is the evidence.
+
+Let me do it.
+
+[assistant]
+<acp tokens="75" type="text">m01975</acp>
+Confirmed a real issue: `Warmup` has **no call sites**, so the ~240ms dictionary load happens lazily on the **first keystroke inside the host process**. The v3 panel snapshots hint at exactly that (after `N` the panel didn't exist yet; after `I` it did). Measuring it precisely rather than assuming:
+
+[assistant • edit]
+{"file_path":"D:\\Documents\\deepseek-harness\\default-workspace\\xingbian-ime\\scratch\\realhost\\Program.cs","old_string":"        private static int Main(string[] args)\n        {\n            try { Console.OutputEncoding = Encoding.UTF8; } catch (Exception) { }\n            Console.WriteLine(\"RealHost v3 —— 真实记事本 + 真实按键 + 两个独立证据源\");\n            Console.WriteLine();\n\n            CoInitializeEx(IntPtr.Zero, 2);","new_string":"        private static int Main(string[] args)\n        {\n            try { Console.OutputEncoding = Encoding.UTF8; } catch (Exception) { }\n            Console.WriteLine(\"RealHost v3 —— 真实记事本 + 真实按键 + 两个独立证据源\");\n            Console.WriteLine();\n\n            CoInitializeEx(IntPtr.Zero, 2);\n\n            if (args.Length > 0 && args[0] == \"--latency\") { return LatencyMode(); }"}
+
+[tool • edit]
+The file D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\realhost\Program.cs has been updated successfully.

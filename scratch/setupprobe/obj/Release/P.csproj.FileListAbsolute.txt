@@ -1,0 +1,10 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\setupprobe\obj\Release\P.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\setupprobe\obj\Release\P.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\setupprobe\obj\Release\P.AssemblyInfoInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\setupprobe\obj\Release\P.AssemblyInfo.cs
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\setupprobe\obj\Release\P.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\setupprobe\bin\Release\SetupProbe.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\setupprobe\bin\Release\SetupProbe.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\setupprobe\bin\Release\SetupProbe.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\setupprobe\obj\Release\SetupProbe.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\setupprobe\obj\Release\SetupProbe.pdb

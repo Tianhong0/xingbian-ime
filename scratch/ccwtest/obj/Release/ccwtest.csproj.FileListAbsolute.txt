@@ -1,0 +1,10 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\ccwtest\obj\Release\ccwtest.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\ccwtest\obj\Release\ccwtest.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\ccwtest\obj\Release\ccwtest.AssemblyInfoInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\ccwtest\obj\Release\ccwtest.AssemblyInfo.cs
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\ccwtest\obj\Release\ccwtest.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\ccwtest\bin\Release\ccwtest.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\ccwtest\bin\Release\ccwtest.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\ccwtest\bin\Release\ccwtest.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\ccwtest\obj\Release\ccwtest.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\ccwtest\obj\Release\ccwtest.pdb

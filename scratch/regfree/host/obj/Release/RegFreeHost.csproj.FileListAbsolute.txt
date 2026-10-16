@@ -1,0 +1,10 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\host\bin\Release\RegFreeHost.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\host\bin\Release\RegFreeHost.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\host\bin\Release\RegFreeHost.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\host\obj\Release\RegFreeHost.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\host\obj\Release\RegFreeHost.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\host\obj\Release\RegFreeHost.AssemblyInfoInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\host\obj\Release\RegFreeHost.AssemblyInfo.cs
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\host\obj\Release\RegFreeHost.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\host\obj\Release\RegFreeHost.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\host\obj\Release\RegFreeHost.pdb

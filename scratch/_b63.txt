@@ -1,0 +1,46 @@
+[user]
+<acp tokens="2.1K" type="text">m01943</acp>
+Agent cac439f2-8c8f-4e0d-b811-52abc4fabe24 sent a message: 端到端验证 harness 完成：**10/10 指定用例全部 PASS，exit code 0**。产出在 `D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\e2e\`（`E2E.csproj` / `Program.cs` / `FakeTextStore.cs` / `Interop.cs` / `Win32.cs` / `RESULTS.md` / `panel.png` / `run-output.txt`）。未修改 `src\`、`docs\`、`tools\`、`assets\`、`install\` 下任何文件。
+
+**① 构建**（唯一可用的调用形式，`-m:1` 是必须的）：
+```
+& "C:\Program Files\dotnet\dotnet.exe" build "...\scratch\e2e\E2E.csproj" -c Release -v m -nologo -m:1
+  Xingbian.Core -> ...\src\Xingbian.Core\bin\Release\Xingbian.Core.dll
+  Xingbian.Tsf  -> ...\src\Xingbian.Tsf\bin\Release\Xingbian.Tsf.dll
+  E2E           -> ...\scratch\e2e\bin\Release\E2E.exe
+已成功生成。 0 个警告 0 个错误
+```
+两个坑：① 不加 `-m:1` 时 `_GetProjectReferenceTargetFrameworkProperties` 派生的 MSBuild worker 在本沙箱静默死亡，报自相矛盾的 `生成失败。 0 个警告 0 个错误`，连编译器都不启动；② `E2E.csproj` 必须 `<Compile Remove="_stale\**" />`，否则 SDK 递归 glob 会把废弃草稿编进来造成类型重复定义。
+
+**② 10 条用例逐条结果**（原始值，未验证项在 ⑤）：
+1. 主链路 PASS —— 假存储最终文本 **`"亻尔 女马"`**（len=5，码点 `U+4EBB U+5C14 U+0020 U+5973 U+9A6C`，精确相等）。日志：`按键 'N'/'I'/'M'/'A' 各 eaten=True hr=0x00000000`，`SPACE eaten=True`，`InsertTextAtSelection 被调用次数=1`，`RequestLock 1 次 / OnLockGranted 1 次`，`最后一次 RequestLock 的 flags = 0x7`。
+2. 四字母全吞 PASS。3. 候选排序 PASS —— `nima+1 → "亻尔 女马"`，`nima+2 → "尸匕 王马"`（`U+5C38 U+5315 U+0020 U+738B U+9A6C`），相同=False。4. Esc PASS —— `store=""`、`InsertTextAtSelection 次数=0`、随后空格 `eaten=False`。5. Backspace PASS —— `nima+BS×2+空格 → "亻尔"`；`n+BS` 后空格 `eaten=False`。（提问里「退一次就不该是『你妈』」的说法与「nim 首候选是『你妈』」自相矛盾，实测证实后者对：必须退两次。）6. 空缓冲区三功能键 PASS。7. Ctrl/Alt PASS —— 基线 `eaten=True`，注入 Ctrl 后 `eaten=False`，Alt 同。8. Shift PASS —— `中文=True → 第1对后英文 → 第2对后中文`；另复现了「退格后第一次 Shift 无效」的闩锁缺陷。9. 候选窗 PASS —— `EX 样式=0x08000088`（TOOLWINDOW|TOPMOST|NOACTIVATE 全中）、`IsWindowVisible=True`、`163x98`、`panel.png` 2172 B、Esc 后隐藏。10. `pic=null` PASS —— 三个入口 hr 均 `0x00000000`、无异常逃逸。
+
+**③ 最重要的结论：只有模型 A（同步授权）能跑通。** `RequestLock` 内部必须同步回调 `ITextStoreACPSink::OnLockGranted`，由 TSF 在 `OnLockGranted` 里调 `ITfEditSession::DoEditSession`。实测差异（同一路径仅切换该行为）：模型 A → `OnLockGranted 1 次`、`InsertTextAtSelection 1 次`、store=`"亻尔 女马"`；模型 B（返回 `TS_S_ASYNC=0x00040300`）→ `OnLockGranted 0 次`、`InsertTextAtSelection 0 次`、store=`""`，且宿主事后补调 `RunDeferredLock()` 后 store **仍为空**。两处独立证据：① `textstor.h:534-537` 的 `RequestLock` 参数里根本没有 session/`ec` 指针，存储物理上无法自己调 `DoEditSession`；② Wine `context.c`（已下载到 `scratch\e2e\wine_context.c`）`Context_RequestEditSession:251` 把锁转给存储后，`TextStoreACPSink_OnLockGranted:914` 执行 `ITfEditSession_DoEditSession(This->currentEditSession, ec)`，而 `ec` 是 `:910-912` 在 `OnLockGranted` 内部刚铸出来的。模型 B 失败还有第二层原因在 SUT 自身：`TextService.cs:751-752` 在 `RequestEditSession` 返回后立刻清空 `_pendingInsert`，异步锁下 `DoEditSession` 看到的已是 `null`。
+
+**④ 方法序核对**：`ITextStoreACP` 不在 `TsfInterop.cs` 也不在 `sdk_msctf.h`，属 `textstor.h`。`curl.exe` 不可用、`Invoke-WebRequest` 失败，**Python urllib 可用**，取到 `scratch\e2e\textstor.h`（mingw-w64 再分发，31982 B）与 `textstor.idl`（ReactOS，10663 B）。`typedef struct ITextStoreACPVtbl {` 在 `textstor.h:508` 开、`:699` 关，用正则抓槽位得到 26 项唯一序列（`AdviseSink:524, UnadviseSink:530, RequestLock:534, GetStatus:539, QueryInsert:543, GetSelection:551, SetSelection:558, GetText:563, SetText:575, GetFormattedText:584, GetEmbedded:590, QueryInsertEmbedded:597, InsertEmbedded:603, InsertTextAtSelection:611, InsertEmbeddedAtSelection:620, RequestSupportedAttrs:628, RequestAttrsAtPosition:634, RequestAttrsTransitioningAtPosition:641, FindNextAttrTransition:648, RetrieveRequestedAttrs:659, GetEndACP:665, GetActiveView:669, GetACPFromPoint:673, GetTextExt:680, GetScreenExt:688, GetWnd:693`）+ 3 个 IUnknown 槽 = 29。`textstor.idl:113-302` 顺序一致；IID `28888fe3-c2a0-483a-a3ea-8cb1ce51ff3d` 来自 `textstor.h:505`。**关键区分**：文本存储侧 `InsertTextAtSelection` 是 6 参数（`textstor.h:611-618`），TSF 侧是 5 参数末位 `ITfRange**`。运行时反证更强：整条链 `RequestLock(0x7) → OnLockGranted → DoEditSession(ec) → ITfInsertAtSelection::InsertTextAtSelection → 假存储收到精确文本` 全序正确。
+
+**⑤ 未验证**：(a) 真实按键路由（TIP 未注册，直接调 `OnTestKeyDown/OnKeyDown`，但严格按「testEaten=false 就不调 OnKeyDown」的真实契约）；(b) 真实宿主互操作；(c) **用例 7 真实物理修饰键注入路径** —— `SendInput` 在本会话注入不进去（`返回=1, GetKeyState=0x0000 高位=False`），改用 `SetKeyboardState`（`GetKeyState=0xFF80` 生效后 `N` 不吞）；语义等价因为 `HasControlOrAlt()` 只读同线程 `GetKeyState`，但严格说真实注入未跑通；(d) **`panel.png` 视觉内容未确认** —— 本模型不支持图像输入，只做了像素统计（163x98、100 色、白 8860 px、选中蓝 `(0,120,215)` 4931 px、非背景 7114 px，包围盒覆盖全窗）→ 能证明窗口真被绘制、不能证明文字渲染正确；`PrintWindow` 与屏幕 `BitBlt` 给出相同非黑像素数 2662；(e) `TrySetTextAtSelection` 回退路径未覆盖（主路径一次成功）；(f) `TextService.cs` 在我作业期间被并发修改（937→1013→1020 行），报告行号对应 1020 行版本；(g) 无压力/多线程/焦点切换测试。
+
+**⑥ 发现的 TextService.cs 真实缺陷（未代改）**：
+- **缺陷 1（`TextService.cs:307-325` + `:736-738`）**：`pic == null` 时仍吞键。`OnKeyDown` 在 `ShouldEat` 通过后立即 `pfEaten = true`，不检查 `pic`；而 `InsertIntoDocument` 开头 `if (pic == null) return false`。复现（用例 10 原始输出）：`OnKeyDown(null, VK_N) -> eaten=True`、`OnKeyDown(null, VK_SPACE) -> eaten=True`，但文本永远不会进文档 —— **输入被静默丢弃**。建议在 `ShouldEat` 里对 `pic == null` 返回 false，或在置 `pfEaten` 前早退。
+- **缺陷 2（`TextService.cs:325` / `:428` / `:404`）**：`_shiftChord` 闩锁。任何非字母被吞的功能键都会置 `_shiftChord = true`，而只有 Shift 的 `OnKeyUp` 与 `ResetInput()` 会清它；`Backspace` 把 buffer 清空时走 `HidePanel(); return;` 而不调 `ResetInput()`，于是闩锁残留，**下一次 Shift 单击完全无效**。复现（用例 8b 原始输出）：`敲 n 再退格后，第 1 对 Shift 后 eaten 仍=True，第 2 对后才=False`。全新实例上第 1 对即正常（8a），差别只在之前是否按过被吞的功能键。
+- 两条未升级为缺陷的观察：`ShouldEat` 在中文模式下无条件吞 a-z 而不检查词典是否加载（`AppendLetter` 才检查）→ 词典加载失败时表现为「键盘打不出英文」（本次词典正常，**未实测复现**）；`DoEditSession` 永远返回 `S_OK` 把结果藏在 `_pendingInsertHr`（有意设计，但会让缺陷 1 的失败更难被上层察觉）。
+
+[user]
+<acp tokens="705" type="text">m01944</acp>
+Background subagent cac439f2-8c8f-4e0d-b811-52abc4fabe24 finished and will do no further work unless you send it more.Its closing message:端到端 harness 已完成并全部通过。
+
+## 结论摘要
+
+**10/10 指定用例 PASS，进程退出码 0。** 主链路实测：敲 `N I M A` + 空格后，假文本存储里的文本精确等于 **`亻尔 女马`**（len=5，`U+4EBB U+5C14 U+0020 U+5973 U+9A6C`），`InsertTextAtSelection` 被调用 1 次、`RequestLock` 1 次（flags=`0x7`=`TS_LF_SYNC|TS_LF_READWRITE`）、`OnLockGranted` 1 次 —— 这条链走的是真实 `msctf.dll` 的编辑会话机制，不是模拟的。
+
+**最重要的技术结论（③）：只有「模型 A」能跑通。** `RequestLock` 内部必须**同步**回调 `ITextStoreACPSink::OnLockGranted`，由 TSF 自己在那里调 `ITfEditSession::DoEditSession` —— 因为 `textstor.h:534-537` 的 `RequestLock` 参数里根本没有 session 指针，文本存储在物理上无法自己调 `DoEditSession`；Wine 的 `context.c:914` 也正是这么实现的（`ec` 是在 `OnLockGranted` 内部才铸出来）。模型 B（返回 `TS_S_ASYNC`）实测 `OnLockGranted 0 次`、`InsertTextAtSelection 0 次`、store 为空，**连宿主事后补授权都救不回来**。
+
+**两个额外的真实缺陷（⑥，未代改 src）：**
+- `TextService.cs:307-325`：`pic == null` 时仍然吞键（`eaten=True`）而 `InsertIntoDocument` 直接返回 false → **用户输入被静默丢弃**。
+- `TextService.cs:325` + `:428`：`_shiftChord` 闩锁 —— 退格清空缓冲区后**第一次 Shift 单击完全无效**，要按第二次才切换中/英。
+
+**我没有验证到的（⑤）**：真实按键路由与真实宿主互操作（TIP 无法注册）；用例 7 的真实物理修饰键注入（`SendInput` 在本会话无效，改用语义等价的 `SetKeyboardState`）；`panel.png` 的**视觉内容**（本模型不支持图像输入，只做了像素统计：163×98、100 色、非背景像素 7114，能证明窗口真被绘制、不能证明文字正确 —— 这一点我如实标注，没有假装看过截图）；以及 `TrySetTextAtSelection` 回退路径。
+
+产出全部在 `scratch\e2e\`：`RESULTS.md`（46 KB，13 条用例原始观测值 + 6 个手写分析章节，重跑不会覆盖手写部分）、`Program.cs`、`FakeTextStore.cs`、`Interop.cs`、`Win32.cs`、`E2E.csproj`、`panel.png`、`run-output.txt`，以及留存的权威证据 `textstor.h` / `textstor.idl` / `wine_context.c`。`src\`、`docs\`、`tools\`、`assets\`、`install\` 下没有任何文件被修改（已核对时间戳）。

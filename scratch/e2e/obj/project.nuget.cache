@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "cX8psTW4DVg=",
+  "success": true,
+  "projectFilePath": "D:\\Documents\\deepseek-harness\\default-workspace\\xingbian-ime\\scratch\\e2e\\E2E.csproj",
+  "expectedPackageFiles": [
+    "D:\\Documents\\deepseek-harness\\default-workspace\\xingbian-ime\\.nuget-packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "D:\\Documents\\deepseek-harness\\default-workspace\\xingbian-ime\\.nuget-packages\\microsoft.netframework.referenceassemblies.net48\\1.0.3\\microsoft.netframework.referenceassemblies.net48.1.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

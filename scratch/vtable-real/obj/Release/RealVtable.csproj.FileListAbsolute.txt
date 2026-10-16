@@ -1,0 +1,10 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable-real\bin\Release\RealVtable.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable-real\bin\Release\RealVtable.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable-real\bin\Release\RealVtable.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable-real\obj\Release\RealVtable.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable-real\obj\Release\RealVtable.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable-real\obj\Release\RealVtable.AssemblyInfoInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable-real\obj\Release\RealVtable.AssemblyInfo.cs
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable-real\obj\Release\RealVtable.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable-real\obj\Release\RealVtable.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\vtable-real\obj\Release\RealVtable.pdb

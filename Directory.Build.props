@@ -1,0 +1,46 @@
+<Project>
+
+  <!--
+    形变输入法 / Xingbian IME —— 全局构建约定
+
+    环境事实（本机实测，2026-10）：
+      * 只有 .NET SDK 8.0.425，没有 MSVC / Windows SDK / CMake → C++ 路线不可行
+      * 目标进程（记事本 / Office / 浏览器）需要 in-proc COM 服务器，
+        只有 .NET Framework 4.8 能作为任意宿主的 in-proc COM 服务器被加载
+        （.NET 5+ 的 EnableComHosting 需要 native 宿主，不适用）
+      * net48 的参考程序集通过 NuGet 包 Microsoft.NETFramework.ReferenceAssemblies
+        还原（api.nuget.org 可达；nuget.org 的 V3 服务索引在 dotnet restore 里会失败，
+         因此统一走仓库内本地离线源 .nuget-local）
+      * 统一 LangVersion 7.3：net48 没有 System.Index / System.Range，
+        C# 8 的 ^1 / .. 语法会直接编译失败
+
+    ⚠️ 写代码时不要使用：C# 8+ 的 ^n / a..b 区间、using var 声明、record、
+       switch 表达式、目标类型 new()、可空引用类型标注。
+  -->
+
+  <PropertyGroup>
+    <LangVersion>7.3</LangVersion>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>x64</Platforms>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Deterministic>true</Deterministic>
+    <DebugType>portable</DebugType>
+    <Company>XingbianIME</Company>
+    <Product>形变输入法</Product>
+    <Copyright>MIT</Copyright>
+    <Version>0.1.0</Version>
+    <NeutralLanguage>zh-CN</NeutralLanguage>
+    <NoWarn>$(NoWarn);CS1591;MSB3270</NoWarn>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

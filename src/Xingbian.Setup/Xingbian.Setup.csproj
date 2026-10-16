@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AssemblyName>Xingbian.Setup</AssemblyName>
+    <RootNamespace>Xingbian.Setup</RootNamespace>
+    <Company>XingbianIME</Company>
+    <Product>形变输入法安装程序</Product>
+    <Version>0.1.0</Version>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- 嵌入资源：安装器把这三个载荷从自身解出来再交给注册脚本 -->
+    <EmbeddedResource Include="payload\Xingbian.Tsf.dll" LogicalName="Xingbian.Setup.Tsf.dll" />
+    <EmbeddedResource Include="payload\Xingbian.Core.dll" LogicalName="Xingbian.Setup.Core.dll" />
+    <EmbeddedResource Include="payload\xingbian.bin" LogicalName="Xingbian.Setup.Dict.bin" />
+    <EmbeddedResource Include="payload\register.ps1" LogicalName="Xingbian.Setup.register.ps1" />
+    <EmbeddedResource Include="payload\unregister.ps1" LogicalName="Xingbian.Setup.unregister.ps1" />
+  </ItemGroup>
+</Project>

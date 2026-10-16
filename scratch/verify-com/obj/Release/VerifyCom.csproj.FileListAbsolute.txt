@@ -1,0 +1,10 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\verify-com\bin\Release\VerifyCom.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\verify-com\bin\Release\VerifyCom.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\verify-com\bin\Release\VerifyCom.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\verify-com\obj\Release\VerifyCom.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\verify-com\obj\Release\VerifyCom.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\verify-com\obj\Release\VerifyCom.AssemblyInfoInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\verify-com\obj\Release\VerifyCom.AssemblyInfo.cs
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\verify-com\obj\Release\VerifyCom.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\verify-com\obj\Release\VerifyCom.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\verify-com\obj\Release\VerifyCom.pdb

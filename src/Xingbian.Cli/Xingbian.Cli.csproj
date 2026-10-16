@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Xingbian.Cli</AssemblyName>
+    <RootNamespace>Xingbian.Cli</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Xingbian.Core\Xingbian.Core.csproj" />
+  </ItemGroup>
+
+</Project>

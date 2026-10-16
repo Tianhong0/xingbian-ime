@@ -1,0 +1,65 @@
+{
+  "ids": {
+    "url": "https://cdn.jsdelivr.net/gh/cjkvi/cjkvi-ids@master/ids.txt",
+    "file": "ids.txt",
+    "desc": "CJKVI/CHISE 表意文字描述序列 (IDS)，拆字核心数据",
+    "size": 2161631,
+    "sha256": "bfc70a8c09f9f5616ebf0543bd6681e67314e9f7ae2307e5ae8c6f15bdc5c6a6"
+  },
+  "unihan": {
+    "url": "https://www.unicode.org/Public/UCD/latest/ucd/Unihan.zip",
+    "file": "Unihan.zip",
+    "desc": "Unihan 数据库，含 kZVariant/kSemanticVariant 等异体关系",
+    "size": 8340649,
+    "sha256": "4c93ea9c1f636451729a840978f1667a53886af37ba854fdcce109721c63d43e"
+  },
+  "luna": {
+    "url": "https://cdn.jsdelivr.net/gh/rime/rime-luna-pinyin@master/luna_pinyin.dict.yaml",
+    "file": "luna_pinyin.dict.yaml",
+    "desc": "Rime 明月拼音字典，单字/词语读音",
+    "size": 889896,
+    "sha256": "75bcf6eb3ff62b129882ed89cc22b2d80a5347aa72bcfa2ccc839bac298e7314"
+  },
+  "essay": {
+    "url": "https://cdn.jsdelivr.net/gh/rime/rime-essay@master/essay.txt",
+    "file": "essay.txt",
+    "desc": "Rime 八股文词频表，用于候选排序",
+    "size": 5887319,
+    "sha256": "3e8512ebaa6657e35961b1f5762060717c647e3bf471d5e3b86e783b4e934ffb"
+  },
+  "pinyin_data": {
+    "url": "https://cdn.jsdelivr.net/gh/mozillazg/pinyin-data@master/pinyin.txt",
+    "file": "pinyin-data.txt",
+    "desc": "逐字拼音（含多音字），用于建单字读音表",
+    "size": 985318,
+    "sha256": "621f8ca9eff8519f47e2b17b564fd318161e13bca07eea8c8e04993cd5d3b52e"
+  },
+  "phrase_pinyin": {
+    "url": "https://cdn.jsdelivr.net/gh/mozillazg/phrase-pinyin-data@master/pinyin.txt",
+    "file": "phrase-pinyin-data.txt",
+    "desc": "词组拼音，用于建词语读音表",
+    "size": 1256063,
+    "sha256": "dcc769607c220b312fea3e71cb63421298b4b891b1f7356a95ab58f2c96fff81"
+  },
+  "jieba": {
+    "url": "https://cdn.jsdelivr.net/gh/fxsjy/jieba@master/jieba/dict.txt",
+    "file": "jieba_dict.txt",
+    "desc": "结巴分词词典（词+词频），用于建词库",
+    "size": 5071852,
+    "sha256": "7197c3211ddd98962b036cdf40324d1ea2bfaa12bd028e68faa70111a88e12a8"
+  },
+  "opencc_st": {
+    "url": "https://cdn.jsdelivr.net/gh/BYVoid/OpenCC@master/data/dictionary/STCharacters.txt",
+    "file": "opencc_STCharacters.txt",
+    "desc": "简->繁 单字映射",
+    "size": 36026,
+    "sha256": "a0ca1601c70648cf48b33c3c6210ccbecc5c7eead4b4c3daf76587ba2c03582b"
+  },
+  "opencc_ts": {
+    "url": "https://cdn.jsdelivr.net/gh/BYVoid/OpenCC@master/data/dictionary/TSCharacters.txt",
+    "file": "opencc_TSCharacters.txt",
+    "desc": "繁->简 单字映射",
+    "size": 104520,
+    "sha256": "9ff46a7d30e5765375eb13d33f2b03a34d298913caf2b120380679f33ae1642d"
+  }
+}

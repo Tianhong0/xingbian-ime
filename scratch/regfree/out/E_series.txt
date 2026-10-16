@@ -1,0 +1,37 @@
+﻿### E-series: clrClass attribute error variants (registry now present, SxS still authoritative for the clrClass record)
+
+===== V1_toplevel_asmqual =====
+RESULT CreateActCtxW                                    -> handle 0x19ED974F6F8
+RESULT ActivateActCtx                                   -> cookie 0x10B88CB000000001
+RESULT CoCreateInstance(CLSID, IID_IUnknown)                      hr=0x80070002  FAIL HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND)
+
+===== E1_bad_classname =====
+RESULT CreateActCtxW                                    -> handle 0x16F03EE9AE8
+RESULT ActivateActCtx                                   -> cookie 0x10B88D7B00000001
+RESULT CoCreateInstance(CLSID, IID_IUnknown)                      hr=0x80070002  FAIL HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND)
+
+===== E2_bad_version =====
+RESULT CreateActCtxW                                    -> handle 0x1E5538D14A8
+RESULT ActivateActCtx                                   -> cookie 0x10B88E3700000001
+RESULT CoCreateInstance(CLSID, IID_IUnknown)                      hr=0x80070002  FAIL HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND)
+
+===== E3_no_version =====
+RESULT CreateActCtxW                                    -> handle 0x2B7AAB1D878
+RESULT ActivateActCtx                                   -> cookie 0x10B88EF200000001
+RESULT CoCreateInstance(CLSID, IID_IUnknown)                      hr=0x80070002  FAIL HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND)
+
+===== E4_bad_runtimeversion =====
+RESULT CreateActCtxW                                    -> handle 0x1D9CCBA82A8
+RESULT ActivateActCtx                                   -> cookie 0x10B88F9E00000001
+RESULT CoCreateInstance(CLSID, IID_IUnknown)                      hr=0x80131700  FAIL CLR_E_SHIM_RUNTIMELOAD
+
+===== E5_missing_dll_file =====
+RESULT CreateActCtxW                                    -> handle 0x13E6C88DE98
+RESULT ActivateActCtx                                   -> cookie 0x10B8901B00000001
+RESULT CoCreateInstance(CLSID, IID_IUnknown)                      hr=0x80070002  FAIL HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND)
+
+===== E6_wrong_clsid =====
+RESULT CreateActCtxW                                    -> handle 0x26D472778E8
+RESULT ActivateActCtx                                   -> cookie 0x10B890C700000001
+RESULT CoCreateInstance(CLSID, IID_IUnknown)                      hr=0x00000000  OK S_OK
+RESULT CoCreateInstance(CLSID_TF_ThreadMgr, IID_ITfThreadMgr)     hr=0x00000000  OK S_OK

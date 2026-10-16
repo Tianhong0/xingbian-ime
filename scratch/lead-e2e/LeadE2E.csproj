@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>x64</Platforms>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>LeadE2E</AssemblyName>
+    <RootNamespace>LeadE2E</RootNamespace>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NoWarn>$(NoWarn);CS1591;MSB3270</NoWarn>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 直接引用真实交付物，杜绝「副本通过、原件失败」 -->
+    <Reference Include="Xingbian.Tsf">
+      <HintPath>..\..\src\Xingbian.Tsf\bin\Release\Xingbian.Tsf.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="Xingbian.Core">
+      <HintPath>..\..\src\Xingbian.Tsf\bin\Release\Xingbian.Core.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,8 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\cocreate\bin\Release\CoCreate.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\cocreate\bin\Release\CoCreate.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\cocreate\bin\Release\CoCreate.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\cocreate\obj\Release\CoCreate.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\cocreate\obj\Release\CoCreate.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\cocreate\obj\Release\CoCreate.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\cocreate\obj\Release\CoCreate.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\cocreate\obj\Release\CoCreate.pdb

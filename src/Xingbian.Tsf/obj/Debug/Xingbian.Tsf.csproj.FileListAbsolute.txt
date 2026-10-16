@@ -1,0 +1,12 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\bin\Debug\Xingbian.Tsf.dll
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\bin\Debug\Xingbian.Tsf.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\bin\Debug\Xingbian.Core.dll
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\bin\Debug\Xingbian.Core.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\obj\Debug\Xingbian.Tsf.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\obj\Debug\Xingbian.Tsf.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\obj\Debug\Xingbian.Tsf.AssemblyInfoInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\obj\Debug\Xingbian.Tsf.AssemblyInfo.cs
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\obj\Debug\Xingbian.Tsf.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\obj\Debug\Xingbian.98F87B63.Up2Date
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\obj\Debug\Xingbian.Tsf.dll
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\obj\Debug\Xingbian.Tsf.pdb

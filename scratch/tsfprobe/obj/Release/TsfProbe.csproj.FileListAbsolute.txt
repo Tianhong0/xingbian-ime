@@ -1,0 +1,8 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\tsfprobe\bin\Release\TsfProbe.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\tsfprobe\bin\Release\TsfProbe.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\tsfprobe\bin\Release\TsfProbe.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\tsfprobe\obj\Release\TsfProbe.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\tsfprobe\obj\Release\TsfProbe.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\tsfprobe\obj\Release\TsfProbe.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\tsfprobe\obj\Release\TsfProbe.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\tsfprobe\obj\Release\TsfProbe.pdb

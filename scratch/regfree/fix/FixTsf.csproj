@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Faithful rebuild of src\Xingbian.Tsf with ONE edit: ITfTextInputProcessorEx
+       is flattened (Activate/Deactivate declared directly) instead of inheriting
+       ITfTextInputProcessor. Everything else is the real source tree, copied
+       verbatim by src\make_fixed.py.
+
+       Properties (net48, LangVersion 7.3, x64) come from the repository's
+       Directory.Build.props, which is inherited automatically. -->
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Xingbian.Tsf</AssemblyName>
+    <RootNamespace>Xingbian.Tsf</RootNamespace>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <EnableComHosting>false</EnableComHosting>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Xingbian.Core">
+      <HintPath>..\..\..\src\Xingbian.Core\bin\Release\Xingbian.Core.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

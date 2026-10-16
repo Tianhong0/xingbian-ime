@@ -1,0 +1,141 @@
+﻿==============================================================================
+vtable_probe.py  pid=11740
+==============================================================================
+  GetModuleHandleW(mscoree.dll       ) = 0x0
+  GetModuleHandleW(mscoreei.dll      ) = 0x0
+  GetModuleHandleW(clr.dll           ) = 0x0
+  GetModuleHandleW(mscorlib.ni.dll   ) = 0x0
+  GetModuleHandleW(clrjit.dll        ) = 0x0
+  GetModuleHandleW(Xingbian.Tsf.dll  ) = 0x0
+  GetModuleHandleW(Xingbian.Core.dll ) = 0x0
+
+CoCreateInstance hr=0x00000000 S_OK  IUnknown*=0x1CDD2210018
+QI ITfTextInputProcessorEx    hr=0x00000000 ptr=0x1CDD2210020  (delta from IUnknown = +8)
+QI ITfKeyEventSink            hr=0x00000000 ptr=0x1CDD2210030  (delta from IUnknown = +24)
+QI ITfTextInputProcessor      hr=0x00000000 ptr=0x1CDD2210028  (delta from IUnknown = +16)
+
+--- vtable pointers (equal means CLR shares one array) ---
+  IUnknown (as returned)     this=0x000001CDD2210018  vtbl=0x000001CDEAC01068  module_of(vtbl)=(no module)
+  ITfTextInputProcessorEx    this=0x000001CDD2210020  vtbl=0x000001CDEAC009C8  module_of(vtbl)=(no module)
+  ITfKeyEventSink            this=0x000001CDD2210030  vtbl=0x000001CDEAC00B68  module_of(vtbl)=(no module)
+  ITfTextInputProcessor      this=0x000001CDD2210028  vtbl=0x000001CDEAC00A78  module_of(vtbl)=(no module)
+
+==============================================================================
+IUnknown (as returned)   this=0x1CDD2210018   vtbl=0x1CDEAC01068
+==============================================================================
+  --- raw qwords vtbl-0x20 .. vtbl+0xA0 ---
+    [ -4] 0x0000000000000000  -                      null
+    [ -3] 0x0000000000000000  -                      null
+    [ -2] 0x0000000000000000  -                      null
+    [ -1] 0x0000000000000000  -                      null
+    [ +0] 0x00007FFA19297AF0  (?)                    prot=0x20 EXEC  <-- slot[0] QI
+    [ +1] 0x00007FFA191A88E0  (?)                    prot=0x20 EXEC  <-- slot[1] AddRef
+    [ +2] 0x00007FFA191A8990  (?)                    prot=0x20 EXEC  <-- slot[2] Release
+    [ +3] 0x00007FFA19605580  (?)                    prot=0x20 EXEC  <-- slot[3]
+    [ +4] 0x00007FFA19605740  (?)                    prot=0x20 EXEC  <-- slot[4]
+    [ +5] 0x00007FFA196053A0  (?)                    prot=0x20 EXEC  <-- slot[5]
+    [ +6] 0x00007FFA19605950  (?)                    prot=0x20 EXEC  <-- slot[6]
+    [ +7] 0x000001CDEAC01152  (no module)            prot=0x40 EXEC  <-- slot[7]
+    [ +8] 0x000001CDEAC0118A  (no module)            prot=0x40 EXEC  <-- slot[8]
+    [ +9] 0x000001CDEAC011C2  (no module)            prot=0x40 EXEC  <-- slot[9]
+    [+10] 0x000001CDEAC011FA  (no module)            prot=0x40 EXEC  <-- slot[10]
+    [+11] 0x000001CDEAC01242  (no module)            prot=0x40 EXEC  <-- slot[11]
+    [+12] 0x000001CDEAC0127A  (no module)            prot=0x40 EXEC  <-- slot[12]
+    [+13] 0x000001CDEAC012B2  (no module)            prot=0x40 EXEC  <-- slot[13]
+    [+14] 0x000001CDEAC012EA  (no module)            prot=0x40 EXEC  <-- slot[14]
+    [+15] 0x000001CDEAC01322  (no module)            prot=0x40 EXEC  <-- slot[15]
+    [+16] 0x000001CDEAC0135A  (no module)            prot=0x40 EXEC  <-- slot[16]
+    [+17] 0x000001CDEAC01392  (no module)            prot=0x40 EXEC  <-- slot[17]
+    [+18] 0x000001CDEAC013CA  (no module)            prot=0x40 EXEC  <-- slot[18]
+    [+19] 0x000001CDEAC01402  (no module)            prot=0x40 EXEC  <-- slot[19]
+    [+20] 0x000001CDEAC0143A  (no module)            prot=0x40 EXEC  <-- slot[20]
+
+==============================================================================
+ITfTextInputProcessorEx   this=0x1CDD2210020   vtbl=0x1CDEAC009C8
+==============================================================================
+  --- raw qwords vtbl-0x20 .. vtbl+0xA0 ---
+    [ -4] 0x0000000000000000  -                      null
+    [ -3] 0x0000000000000000  -                      null
+    [ -2] 0x433DF9CD6E4E2102  (no module)            UNMAPPED
+    [ -1] 0x07653AE03C3096B4  (no module)            UNMAPPED
+    [ +0] 0x00007FFA19297AF0  (?)                    prot=0x20 EXEC  <-- slot[0] QI
+    [ +1] 0x00007FFA191A88E0  (?)                    prot=0x20 EXEC  <-- slot[1] AddRef
+    [ +2] 0x00007FFA191A8990  (?)                    prot=0x20 EXEC  <-- slot[2] Release
+    [ +3] 0x000001CDEAC009F2  (no module)            prot=0x40 EXEC  <-- slot[3]
+    [ +4] 0x00007FFA192C12F0  (?)                    prot=0x20 EXEC  <-- slot[4]
+    [ +5] 0xFFFFFFF015FF9090  (no module)            UNMAPPED  <-- slot[5]
+    [ +6] 0x0000000000000049  (no module)            state=0x10000  <-- slot[6]
+    [ +7] 0x00007FF9B99F5280  (no module)            prot=0x4 DATA  <-- slot[7]
+    [ +8] 0x00007FF9B99F4D98  (no module)            prot=0x4 DATA  <-- slot[8]
+    [ +9] 0x0000000000000000  -                      null  <-- slot[9]
+    [+10] 0x000000000000FFFF  (no module)            state=0x10000  <-- slot[10]
+    [+11] 0x0000000000000000  -                      null  <-- slot[11]
+    [+12] 0x1000D94B47DC7DAF  (no module)            UNMAPPED  <-- slot[12]
+    [+13] 0x00000000DEADC0FF  (no module)            state=0x10000  <-- slot[13]
+    [+14] 0x00007FF9B99F4D08  (no module)            prot=0x4 DATA  <-- slot[14]
+    [+15] 0x0000000100000002  (no module)            state=0x10000  <-- slot[15]
+    [+16] 0x0000000000000551  (no module)            state=0x10000  <-- slot[16]
+    [+17] 0x0000000000000000  -                      null  <-- slot[17]
+    [+18] 0x0000000000000000  -                      null  <-- slot[18]
+    [+19] 0x0000000000000000  -                      null  <-- slot[19]
+    [+20] 0x11D22021AA80E7F7  (no module)            UNMAPPED  <-- slot[20]
+
+==============================================================================
+ITfKeyEventSink   this=0x1CDD2210030   vtbl=0x1CDEAC00B68
+==============================================================================
+  --- raw qwords vtbl-0x20 .. vtbl+0xA0 ---
+    [ -4] 0x0000000000000000  -                      null
+    [ -3] 0x0000000000000000  -                      null
+    [ -2] 0x11D22021AA80E7F5  (no module)            UNMAPPED
+    [ -1] 0x6EB867B06000E093  (no module)            UNMAPPED
+    [ +0] 0x00007FFA19297AF0  (?)                    prot=0x20 EXEC  <-- slot[0] QI
+    [ +1] 0x00007FFA191A88E0  (?)                    prot=0x20 EXEC  <-- slot[1] AddRef
+    [ +2] 0x00007FFA191A8990  (?)                    prot=0x20 EXEC  <-- slot[2] Release
+    [ +3] 0x000001CDEAC00BBA  (no module)            prot=0x40 EXEC  <-- slot[3]
+    [ +4] 0x000001CDEAC00BF2  (no module)            prot=0x40 EXEC  <-- slot[4]
+    [ +5] 0x000001CDEAC00C2A  (no module)            prot=0x40 EXEC  <-- slot[5]
+    [ +6] 0x000001CDEAC00C62  (no module)            prot=0x40 EXEC  <-- slot[6]
+    [ +7] 0x000001CDEAC00C9A  (no module)            prot=0x40 EXEC  <-- slot[7]
+    [ +8] 0x000001CDEAC00CD2  (no module)            prot=0x40 EXEC  <-- slot[8]
+    [ +9] 0x00007FFA192C12F0  (?)                    prot=0x20 EXEC  <-- slot[9]
+    [+10] 0xFFFFFFF015FF9090  (no module)            UNMAPPED  <-- slot[10]
+    [+11] 0x000001CD00000049  (no module)            state=0x10000  <-- slot[11]
+    [+12] 0x00007FF9B99F5298  (no module)            prot=0x4 DATA  <-- slot[12]
+    [+13] 0x00007FF9B99F4E40  (no module)            prot=0x4 DATA  <-- slot[13]
+    [+14] 0x0000000000000000  -                      null  <-- slot[14]
+    [+15] 0x00007FFAFFFFFFFF  (no module)            state=0x10000  <-- slot[15]
+    [+16] 0x00007FFA192C12F0  (?)                    prot=0x20 EXEC  <-- slot[16]
+    [+17] 0xFFFFFFF015FF9090  (no module)            UNMAPPED  <-- slot[17]
+    [+18] 0x0000000600000049  (no module)            state=0x10000  <-- slot[18]
+    [+19] 0x00007FF9B99F52A0  (no module)            prot=0x4 DATA  <-- slot[19]
+    [+20] 0x00007FF9B99F4E50  (no module)            prot=0x4 DATA  <-- slot[20]
+
+==============================================================================
+ITfTextInputProcessor   this=0x1CDD2210028   vtbl=0x1CDEAC00A78
+==============================================================================
+  --- raw qwords vtbl-0x20 .. vtbl+0xA0 ---
+    [ -4] 0x0000000000000000  -                      null
+    [ -3] 0x0000000000000000  -                      null
+    [ -2] 0x11D22021AA80E7F7  (no module)            UNMAPPED
+    [ -1] 0x6EB867B06000E093  (no module)            UNMAPPED
+    [ +0] 0x00007FFA19297AF0  (?)                    prot=0x20 EXEC  <-- slot[0] QI
+    [ +1] 0x00007FFA191A88E0  (?)                    prot=0x20 EXEC  <-- slot[1] AddRef
+    [ +2] 0x00007FFA191A8990  (?)                    prot=0x20 EXEC  <-- slot[2] Release
+    [ +3] 0x000001CDEAC00AAA  (no module)            prot=0x40 EXEC  <-- slot[3]
+    [ +4] 0x000001CDEAC00AE2  (no module)            prot=0x40 EXEC  <-- slot[4]
+    [ +5] 0x00007FFA192C12F0  (?)                    prot=0x20 EXEC  <-- slot[5]
+    [ +6] 0xFFFFFFF015FF9090  (no module)            UNMAPPED  <-- slot[6]
+    [ +7] 0x0043002000000049  (no module)            UNMAPPED  <-- slot[7]
+    [ +8] 0x00007FF9B99F5288  (no module)            prot=0x4 DATA  <-- slot[8]
+    [ +9] 0x00007FF9B99F4CE8  (no module)            prot=0x4 DATA  <-- slot[9]
+    [+10] 0x0000000000000000  -                      null  <-- slot[10]
+    [+11] 0x0020002C006CFFFF  (no module)            UNMAPPED  <-- slot[11]
+    [+12] 0x00007FFA192C12F0  (?)                    prot=0x20 EXEC  <-- slot[12]
+    [+13] 0xFFFFFFF015FF9090  (no module)            UNMAPPED  <-- slot[13]
+    [+14] 0x006B006F00000049  (no module)            UNMAPPED  <-- slot[14]
+    [+15] 0x00007FF9B99F5290  (no module)            prot=0x4 DATA  <-- slot[15]
+    [+16] 0x00007FF9B99F4CF8  (no module)            prot=0x4 DATA  <-- slot[16]
+    [+17] 0x0000000000000000  -                      null  <-- slot[17]
+    [+18] 0x202279726576FFFF  (no module)            UNMAPPED  <-- slot[18]
+    [+19] 0x0000000000000000  -                      null  <-- slot[19]
+    [+20] 0x1000D94F57DC7DBF  (no module)            UNMAPPED  <-- slot[20]

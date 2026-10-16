@@ -1,0 +1,13 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\obj\Release\LeadE2E.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\obj\Release\LeadE2E.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\obj\Release\LeadE2E.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\bin\Release\LeadE2E.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\bin\Release\LeadE2E.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\bin\Release\LeadE2E.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\bin\Release\Xingbian.Core.dll
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\bin\Release\Xingbian.Tsf.dll
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\bin\Release\Xingbian.Tsf.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\bin\Release\Xingbian.Core.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\obj\Release\LeadE2E.csproj.Up2Date
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\obj\Release\LeadE2E.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\lead-e2e\obj\Release\LeadE2E.pdb

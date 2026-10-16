@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>VerifyCom</AssemblyName>
+    <RootNamespace>VerifyCom</RootNamespace>
+  </PropertyGroup>
+
+</Project>

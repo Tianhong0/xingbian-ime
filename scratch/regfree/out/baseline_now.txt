@@ -1,0 +1,38 @@
+﻿==============================================================================
+ts_host.py (PYTHON_NATIVE)  variant=baseline_nomanifest
+interpreter  : C:\Users\19005\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe
+pid          : 824
+bits         : 64
+app dir      : D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\app
+==============================================================================
+RESULT CoInitializeEx(APARTMENTTHREADED)                          hr=0x00000000  OK S_OK
+
+------------------------------------------------------------------------------
+BASELINE: no registration-free manifest, no registry entry
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+LAYER 1: ole32!CoCreateInstance(CLSID_TextService, IID_IUnknown)
+------------------------------------------------------------------------------
+RESULT CoCreateInstance(CLSID, IID_IUnknown)                      hr=0x00000000  OK S_OK
+OK: IUnknown* = 0x261A48A0018
+
+------------------------------------------------------------------------------
+LAYER 2: QueryInterface for the TSF IIDs
+------------------------------------------------------------------------------
+RESULT QI ITfTextInputProcessorEx {6E4E2102-F9CD-433D-B496-303CE03A6507} hr=0x00000000  OK S_OK
+OK: ITfTextInputProcessorEx -> 0x261A48A0020
+RESULT QI ITfKeyEventSink         {AA80E7F5-2021-11D2-93E0-0060B067B86E} hr=0x00000000  OK S_OK
+OK: ITfKeyEventSink -> 0x261A48A0030
+RESULT QI ITfTextInputProcessor   {AA80E7F7-2021-11D2-93E0-0060B067B86E} hr=0x00000000  OK S_OK
+OK: ITfTextInputProcessor -> 0x261A48A0028
+RESULT QI IID_IUnknown (idempotent re-QI)                         hr=0x00000000  OK S_OK
+OK: IID_IUnknown -> 0x261A48A0018
+
+>>> If this printed REGDB_E_CLASSNOTREG, it proves the CLSID is genuinely
+>>> unregistered on this machine -- so anything that works later works
+>>> *because of the manifest*, not because of a leftover registry entry.
+
+==============================================================================
+ALL STEPS SUCCEEDED
+==============================================================================

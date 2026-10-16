@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    RegFreeHost: a NATIVE-EQUIVALENT COM host for the Xingbian TSF text service.
+
+    It exists to answer one question: can a host process that knows NOTHING about
+    Xingbian.Tsf.dll create the text service through the real ole32 activation
+    path, driven only by the CLR class metadata that an installer would publish?
+
+    It deliberately holds NO compile-time reference to Xingbian.Tsf.dll and never
+    calls Activator.CreateInstance on our type, so the assembly must be brought in
+    by the CLR activation machinery rather than by this program.
+
+    LangVersion / TargetFramework / PlatformTarget all come from the repository
+    Directory.Build.props (7.3 / net48 / x64).
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>RegFreeHost</AssemblyName>
+    <RootNamespace>Xingbian.RegFree</RootNamespace>
+    <StartupObject>Xingbian.RegFree.Program</StartupObject>
+  </PropertyGroup>
+
+</Project>

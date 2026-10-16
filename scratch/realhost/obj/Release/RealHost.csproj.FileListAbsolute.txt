@@ -1,0 +1,8 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\realhost\bin\Release\RealHost.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\realhost\bin\Release\RealHost.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\realhost\bin\Release\RealHost.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\realhost\obj\Release\RealHost.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\realhost\obj\Release\RealHost.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\realhost\obj\Release\RealHost.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\realhost\obj\Release\RealHost.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\realhost\obj\Release\RealHost.pdb

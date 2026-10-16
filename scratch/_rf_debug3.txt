@@ -1,0 +1,4 @@
+source encoding guess ok
+RADICAL_WHITELIST codepoints: ['0x4ebb', '0x6c35', '0x5fc4', '0x624c', '0x9485', '0x7e9f']
+LATIN_SHAPE_MAP keys: [['0x513f']]
+u4f60 in accept: False

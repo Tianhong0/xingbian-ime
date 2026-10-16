@@ -1,0 +1,12 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\fix\bin\Release\Xingbian.Tsf.dll
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\fix\bin\Release\Xingbian.Tsf.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\fix\bin\Release\Xingbian.Core.dll
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\fix\bin\Release\Xingbian.Core.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\fix\obj\Release\FixTsf.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\fix\obj\Release\FixTsf.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\fix\obj\Release\FixTsf.AssemblyInfoInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\fix\obj\Release\FixTsf.AssemblyInfo.cs
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\fix\obj\Release\FixTsf.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\fix\obj\Release\FixTsf.csproj.Up2Date
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\fix\obj\Release\Xingbian.Tsf.dll
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\fix\obj\Release\Xingbian.Tsf.pdb

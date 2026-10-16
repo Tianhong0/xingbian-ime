@@ -1,0 +1,82 @@
+﻿==============================================================================
+ts_host.py (PYTHON_NATIVE)  variant=baseline_nomanifest
+interpreter  : D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\app_fixed\python.exe
+pid          : 1392
+bits         : 64
+app dir      : D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\regfree\app
+==============================================================================
+RESULT CoInitializeEx(APARTMENTTHREADED)                          hr=0x00000000  OK S_OK
+
+------------------------------------------------------------------------------
+REGISTRY ROUTE: no activation context, resolve through HKLM\SOFTWARE\Classes
+------------------------------------------------------------------------------
+Nothing is passed to CreateActCtxW -- ole32!CoCreateInstance is left to
+resolve the CLSID the ordinary way, i.e. through the InprocServer32 key.
+
+The key this run depends on:
+  HKLM\SOFTWARE\Classes\CLSID\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}
+    (default)      = C:\Windows\System32\mscoree.dll
+    ThreadingModel = Both
+    Assembly       = Xingbian.Tsf, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null
+    Class          = Xingbian.Tsf.TextService
+    RuntimeVersion = v4.0.30319
+    CodeBase       = file:///C:/Program Files/XingbianIME/Xingbian.Tsf.dll
+
+>>> If this printed REGDB_E_CLASSNOTREG, the CLSID is genuinely unregistered
+>>> on this machine -- so anything that works later works *because of the
+>>> manifest*, not because of a leftover registry entry.
+
+------------------------------------------------------------------------------
+LAYER 1: ole32!CoCreateInstance(CLSID_TextService, IID_IUnknown)
+------------------------------------------------------------------------------
+RESULT CoCreateInstance(CLSID, IID_IUnknown)                      hr=0x00000000  OK S_OK
+OK: IUnknown* = 0x2A1A6D30018
+
+------------------------------------------------------------------------------
+LAYER 2: QueryInterface for the TSF IIDs
+------------------------------------------------------------------------------
+RESULT QI ITfTextInputProcessorEx {6E4E2102-F9CD-433D-B496-303CE03A6507} hr=0x00000000  OK S_OK
+OK: ITfTextInputProcessorEx -> 0x2A1A6D30028
+RESULT QI ITfKeyEventSink         {AA80E7F5-2021-11D2-93E0-0060B067B86E} hr=0x00000000  OK S_OK
+OK: ITfKeyEventSink -> 0x2A1A6D30030
+RESULT QI ITfTextInputProcessor   {AA80E7F7-2021-11D2-93E0-0060B067B86E} hr=0x00000000  OK S_OK
+OK: ITfTextInputProcessor -> 0x2A1A6D30020
+RESULT QI IID_IUnknown (idempotent re-QI)                         hr=0x00000000  OK S_OK
+OK: IID_IUnknown -> 0x2A1A6D30018
+
+------------------------------------------------------------------------------
+LAYER 3: real method calls through the vtables
+------------------------------------------------------------------------------
+RESULT call ITfTextInputProcessor::Activate(NULL, 0)              hr=0x80070057  FAIL E_INVALIDARG
+     TextService.cs:181 has `if (ptim == null) return HResult.E_INVALIDARG;`
+     -> 0x80070057 proves the MANAGED BODY executed in this process.
+RESULT call ITfTextInputProcessor::Deactivate()                   hr=0x00000000  OK S_OK
+RESULT call ITfKeyEventSink::OnSetFocus(FALSE)                    hr=0x00000000  OK S_OK
+
+------------------------------------------------------------------------------
+LAYER 3b: the TSF activation path -- ITfTextInputProcessorEx
+------------------------------------------------------------------------------
+vtable slot[4] of ITfTextInputProcessorEx = 0x000002A1BF770B2A
+RESULT call ITfTextInputProcessorEx::Deactivate()                 hr=0x00000000  OK S_OK
+vtable slot[5] of ITfTextInputProcessorEx = 0x000002A1BF770B62
+RESULT call ITfTextInputProcessorEx::ActivateEx(NULL, 0, 0)       hr=0x80070057  FAIL E_INVALIDARG
+
+------------------------------------------------------------------------------
+LAYER 4: ActivateEx with a REAL ITfThreadMgr produced by TSF
+------------------------------------------------------------------------------
+RESULT CoCreateInstance(CLSID_TF_ThreadMgr, IID_ITfThreadMgr)     hr=0x00000000  OK S_OK
+RESULT QI ITfThreadMgrEx {3E90ADE3-7594-4CB0-BB58-69628F5F091B}   hr=0x80004002  FAIL E_NOINTERFACE
+RESULT ITfThreadMgr::Activate(&tid)                               hr=0x00000000  OK S_OK
+     tid = 32
+RESULT TextService::ActivateEx(real ITfThreadMgr, tid, 0)         hr=0x80070057  FAIL E_INVALIDARG
+RESULT TextService::Deactivate() after real ActivateEx            hr=0x00000000  OK S_OK
+RESULT ITfThreadMgr::Deactivate()                                 hr=0x00000000  OK S_OK
+
+------------------------------------------------------------------------------
+CLEANUP
+------------------------------------------------------------------------------
+RESULT final IUnknown::Release                          -> refcount 4
+
+==============================================================================
+FAILED STEPS (4): QI ITfThreadMgrEx {3E90ADE3-7594-4CB0-BB58-69628F5F091B}; TextService::ActivateEx(real ITfThreadMgr, tid, 0); call ITfTextInputProcessor::Activate(NULL, 0); call ITfTextInputProcessorEx::ActivateEx(NULL, 0, 0)
+==============================================================================

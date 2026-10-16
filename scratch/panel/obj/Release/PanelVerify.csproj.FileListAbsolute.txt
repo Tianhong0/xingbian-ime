@@ -1,0 +1,10 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\bin\Release\PanelVerify.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\bin\Release\PanelVerify.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\bin\Release\PanelVerify.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\obj\Release\PanelVerify.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\obj\Release\PanelVerify.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\obj\Release\PanelVerify.AssemblyInfoInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\obj\Release\PanelVerify.AssemblyInfo.cs
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\obj\Release\PanelVerify.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\obj\Release\PanelVerify.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\panel\obj\Release\PanelVerify.pdb

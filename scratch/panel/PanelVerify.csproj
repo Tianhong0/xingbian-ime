@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    临时验证工程（scratch，可随时删除）。
+    选择方案：用 <Compile Include> 把两个生产 .cs 链接进来，
+    而不是复制副本 —— 这样验证的就是真实交付物本身，改一处即验证一处，
+    不会出现"副本通过、原件失败"的偏差。
+  -->
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>PanelVerify</AssemblyName>
+    <RootNamespace>PanelVerify</RootNamespace>
+    <StartupObject>PanelVerify.Program</StartupObject>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\Xingbian.Tsf\CandidatePanel.cs" Link="CandidatePanel.cs" />
+    <Compile Include="..\..\src\Xingbian.Tsf\CandidatePanel.Native.cs" Link="CandidatePanel.Native.cs" />
+  </ItemGroup>
+
+</Project>

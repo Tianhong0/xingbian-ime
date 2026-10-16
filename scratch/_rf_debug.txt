@@ -1,0 +1,14 @@
+jieba entries: 348974
+你 -> 234587
+尔 -> 3788
+女 -> 27951
+马 -> 19918
+人 -> 313209
+丨 -> 61
+亻 -> 10
+个 -> 125538
+口 -> 20778
+大 -> 144099
+whitelist repr: '亻氵忄扌钅纟饣讠刂卩阝彳宀冖冫辶廴攵夂灬疒衤礻丬尢屮彐彑巛囗勹匚冂凵亠厶幺丷'
+filter stats: {'common_chars': 3350, 'radicals': 38}
+你 in accept: False ; 丨 in accept: False ; 亻 in accept: False

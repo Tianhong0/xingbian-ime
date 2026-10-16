@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    端到端验证 harness（scratch，可随时删除）。
+
+    它引用真实的 src\Xingbian.Tsf，所以验证的就是真实交付物本身：
+    同一进程内 new 出 TextService，喂真实 ITfThreadMgr，模拟按键，
+    看它是否真的把「亻尔 女马」写进我们自己的假文本存储。
+
+    TargetFramework / LangVersion / PlatformTarget 由上层 Directory.Build.props 提供
+    （net48 + C# 7.3 + x64），此处不要覆盖。
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>E2E</AssemblyName>
+    <RootNamespace>Xingbian.E2E</RootNamespace>
+    <StartupObject>Xingbian.E2E.Program</StartupObject>
+    <AssemblyTitle>Xingbian IME end-to-end harness</AssemblyTitle>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+
+  <!--
+    SDK 风格的默认 glob 是 **/*.cs（递归），会把 _stale\ 下的废弃草稿也编进来，
+    导致类型重复定义。这里显式排除，确保只编译 harness 本体。
+  -->
+  <ItemGroup>
+    <Compile Remove="_stale\**" />
+    <None Remove="_stale\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Xingbian.Tsf\Xingbian.Tsf.csproj" />
+  </ItemGroup>
+
+</Project>

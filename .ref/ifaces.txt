@@ -1,0 +1,206 @@
+### ITfTextInputProcessor  IID=aa80e7f7-2021-11d2-93e0-0060b067b86e  (2 methods)
+     0 Activate
+     1 Deactivate
+
+### ITfTextInputProcessorEx  << NOT FOUND >>
+### ITfThreadMgrEventSink  IID=aa80e80e-2021-11d2-93e0-0060b067b86e  (5 methods)
+     0 OnInitDocumentMgr
+     1 OnUninitDocumentMgr
+     2 OnSetFocus
+     3 OnPushContext
+     4 OnPopContext
+
+### ITfKeyEventSink  IID=aa80e7f5-2021-11d2-93e0-0060b067b86e  (6 methods)
+     0 OnSetFocus
+     1 OnTestKeyDown
+     2 OnTestKeyUp
+     3 OnKeyDown
+     4 OnKeyUp
+     5 OnPreservedKey
+
+### ITfCompositionSink  IID=a781718c-579a-4b15-a280-32b8577acc5e  (1 methods)
+     0 OnCompositionTerminated
+
+### ITfDisplayAttributeProvider  << NOT FOUND >>
+### ITfDisplayAttributeInfo  IID=70528852-2f26-4aea-8c96-215150578932  (5 methods)
+     0 GetGUID
+     1 GetDescription
+     2 GetAttributeInfo
+     3 SetAttributeInfo
+     4 Reset
+
+### ITfInputProcessorProfiles  IID=1f02b6c5-7842-4ee6-8a0b-9a24183a95ca  (18 methods)
+     0 Register
+     1 Unregister
+     2 AddLanguageProfile
+     3 RemoveLanguageProfile
+     4 EnumInputProcessorInfo
+     5 GetDefaultLanguageProfile
+     6 SetDefaultLanguageProfile
+     7 ActivateLanguageProfile
+     8 GetActiveLanguageProfile
+     9 GetLanguageProfileDescription
+    10 GetCurrentLanguage
+    11 ChangeCurrentLanguage
+    12 GetLanguageList
+    13 EnumLanguageProfiles
+    14 EnableLanguageProfile
+    15 IsEnabledLanguageProfile
+    16 EnableLanguageProfileByDefault
+    17 SubstituteKeyboardLayout
+
+### ITfInputProcessorProfileMgr  IID=71c6e74c-0f28-11d8-a82a-00065b84435c  (8 methods)
+     0 ActivateProfile
+     1 DeactivateProfile
+     2 GetProfile
+     3 EnumProfiles
+     4 ReleaseInputProcessor
+     5 RegisterProfile
+     6 UnregisterProfile
+     7 GetActiveProfile
+
+### ITfCategoryMgr  IID=c3acefb5-f69d-4905-938f-fcadcf4be830  (14 methods)
+     0 RegisterCategory
+     1 UnregisterCategory
+     2 EnumCategoriesInItem
+     3 EnumItemsInCategory
+     4 FindClosestCategory
+     5 RegisterGUIDDescription
+     6 UnregisterGUIDDescription
+     7 GetGUIDDescription
+     8 RegisterGUIDDWORD
+     9 UnregisterGUIDDWORD
+    10 GetGUIDDWORD
+    11 RegisterGUID
+    12 GetGUID
+    13 IsEqualTfGuidAtom
+
+### ITfThreadMgr  IID=aa80e801-2021-11d2-93e0-0060b067b86e  (11 methods)
+     0 Activate
+     1 Deactivate
+     2 CreateDocumentMgr
+     3 EnumDocumentMgrs
+     4 GetFocus
+     5 SetFocus
+     6 AssociateFocus
+     7 IsThreadFocus
+     8 GetFunctionProvider
+     9 EnumFunctionProviders
+    10 GetGlobalCompartment
+
+### ITfThreadMgrEx  IID=3e90ade3-7594-4cb0-bb58-69628f5f458c  (2 methods)
+     0 ActivateEx
+     1 GetActiveFlags
+
+### ITfKeystrokeMgr  IID=aa80e7f0-2021-11d2-93e0-0060b067b86e  (14 methods)
+     0 AdviseKeyEventSink
+     1 UnadviseKeyEventSink
+     2 GetForeground
+     3 TestKeyDown
+     4 TestKeyUp
+     5 KeyDown
+     6 KeyUp
+     7 GetPreservedKey
+     8 IsPreservedKey
+     9 PreserveKey
+    10 UnpreserveKey
+    11 SetPreservedKeyDescription
+    12 GetPreservedKeyDescription
+    13 SimulatePreservedKey
+
+### ITfContext  IID=aa80e7fd-2021-11d2-93e0-0060b067b86e  (15 methods)
+     0 RequestEditSession
+     1 InWriteSession
+     2 GetSelection
+     3 SetSelection
+     4 GetStart
+     5 GetEnd
+     6 GetActiveView
+     7 EnumViews
+     8 GetStatus
+     9 GetProperty
+    10 GetAppProperty
+    11 TrackProperties
+    12 EnumProperties
+    13 GetDocumentMgr
+    14 CreateRangeBackup
+
+### ITfRange  IID=aa80e7ff-2021-11d2-93e0-0060b067b86e  (22 methods)
+     0 GetText
+     1 SetText
+     2 GetFormattedText
+     3 GetEmbedded
+     4 InsertEmbedded
+     5 ShiftStart
+     6 ShiftEnd
+     7 ShiftStartToRange
+     8 ShiftEndToRange
+     9 ShiftStartRegion
+    10 ShiftEndRegion
+    11 IsEmpty
+    12 Collapse
+    13 IsEqualStart
+    14 IsEqualEnd
+    15 CompareStart
+    16 CompareEnd
+    17 AdjustForInsert
+    18 GetGravity
+    19 SetGravity
+    20 Clone
+    21 GetContext
+
+### ITfRangeACP  IID=057a6296-029b-4154-b79a-0d461d4ea94c  (2 methods)
+     0 GetExtent
+     1 SetExtent
+
+### ITfEditSession  IID=aa80e803-2021-11d2-93e0-0060b067b86e  (1 methods)
+     0 DoEditSession
+
+### ITfInsertAtSelection  IID=55ce16ba-3014-41c1-9ceb-fade1446ac6c  (2 methods)
+     0 InsertTextAtSelection
+     1 InsertEmbeddedAtSelection
+
+### ITfDocumentMgr  IID=aa80e7f4-2021-11d2-93e0-0060b067b86e  (6 methods)
+     0 CreateContext
+     1 Push
+     2 Pop
+     3 GetTop
+     4 GetBase
+     5 EnumContexts
+
+### ITfSource  IID=4ea48a35-60ae-446f-8fd6-e6a8d82459f7  (2 methods)
+     0 AdviseSink
+     1 UnadviseSink
+
+### ITfSourceSingle  IID=73131f9c-56a9-49dd-b0ee-d046633f7528  (2 methods)
+     0 AdviseSingleSink
+     1 UnadviseSingleSink
+
+### ITfClientId  IID=d60a7b49-1b9f-4be2-b702-47e9dc05dec3  (1 methods)
+     0 GetClientId
+
+### ITfThreadFocusSink  IID=c0f1db0c-3a20-405c-a303-96b6010a885f  (2 methods)
+     0 OnSetThreadFocus
+     1 OnKillThreadFocus
+
+### ITfUIElementMgr  IID=ea1ea135-19df-11d7-a6d2-00065b84435c  (5 methods)
+     0 BeginUIElement
+     1 UpdateUIElement
+     2 EndUIElement
+     3 GetUIElement
+     4 EnumUIElements
+
+### ITfUIElement  IID=ea1ea137-19df-11d7-a6d2-00065b84435c  (4 methods)
+     0 GetDescription
+     1 GetGUID
+     2 Show
+     3 IsShown
+
+### ITfCompartmentMgr  IID=7dcf57ac-18ad-438b-824d-979bffb74b7c  (3 methods)
+     0 GetCompartment
+     1 ClearCompartment
+     2 EnumCompartments
+
+### ITfCompartment  IID=bb08f7a9-607a-4384-8623-056892b64371  (2 methods)
+     0 SetValue
+     1 GetValue

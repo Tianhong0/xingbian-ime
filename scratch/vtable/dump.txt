@@ -1,0 +1,157 @@
+=== 字节级 vtable 取证 ===
+CLSID = {7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}
+（MEMORY_BASIC_INFORMATION 偏移已修正：State@32 Protect@36 Type@40）
+
+==============================================================================
+接口 {00000000-0000-0000-C000-000000000046}  (期望槽数 = 3: IUnknown 3 + 方法 0)
+QI hr = 0x00000000 , ptr = 0x226814a0018
+vtable @ 0x22699D81068   [MEM_COMMIT RWX MEM_PRIVATE region=0x1000]
+
+  [0] QueryInterface     = 0x7FFA19297AF0
+        MEM_COMMIT RX MEM_IMAGE region=0x26000
+        bytes: 48 89 5C 24 08 48 89 74 24 10 57 48 83 EC 50 49
+        (未识别为常见桩形式)
+  [1] AddRef             = 0x7FFA191A88E0
+        MEM_COMMIT RX MEM_IMAGE region=0x115000
+        bytes: 40 53 48 83 EC 20 48 8B D9 E8 02 54 11 00 48 85
+        (未识别为常见桩形式)
+  [2] Release            = 0x7FFA191A8990
+        MEM_COMMIT RX MEM_IMAGE region=0x115000
+        bytes: 40 53 48 83 EC 20 48 8B D9 E8 52 53 11 00 48 85
+        (未识别为常见桩形式)
+  [3] <越界槽 3>            = 0x7FFA19605580   <<< 超出接口方法数，本不该被调用
+        MEM_COMMIT RX MEM_IMAGE region=0x26C000
+        bytes: 48 89 5C 24 08 48 89 74 24 10 57 48 83 EC 40 48
+        (未识别为常见桩形式)
+  [4] <越界槽 4>            = 0x7FFA19605740   <<< 超出接口方法数，本不该被调用
+        MEM_COMMIT RX MEM_IMAGE region=0x26C000
+        bytes: 48 89 5C 24 08 48 89 74 24 10 48 89 7C 24 18 55
+        (未识别为常见桩形式)
+
+==============================================================================
+接口 {AA80E7F7-2021-11D2-93E0-0060B067B86E}  (期望槽数 = 5: IUnknown 3 + 方法 2)
+QI hr = 0x00000000 , ptr = 0x226814aff28
+vtable @ 0x22699D80A78   [MEM_COMMIT RWX MEM_PRIVATE region=0x2000]
+
+  [0] QueryInterface     = 0x7FFA19297AF0
+        MEM_COMMIT RX MEM_IMAGE region=0x26000
+        bytes: 48 89 5C 24 08 48 89 74 24 10 57 48 83 EC 50 49
+        (未识别为常见桩形式)
+  [1] AddRef             = 0x7FFA191A88E0
+        MEM_COMMIT RX MEM_IMAGE region=0x115000
+        bytes: 40 53 48 83 EC 20 48 8B D9 E8 02 54 11 00 48 85
+        (未识别为常见桩形式)
+  [2] Release            = 0x7FFA191A8990
+        MEM_COMMIT RX MEM_IMAGE region=0x115000
+        bytes: 40 53 48 83 EC 20 48 8B D9 E8 52 53 11 00 48 85
+        (未识别为常见桩形式)
+  [3] Activate           = 0x22699D80AAA
+        MEM_COMMIT RWX MEM_PRIVATE region=0x2000
+        bytes: FF 15 F0 FF FF FF 49 00 00 00 20 00 20 00 88 52
+        (未识别为常见桩形式)
+  [4] Deactivate         = 0x22699D80AE2
+        MEM_COMMIT RWX MEM_PRIVATE region=0x2000
+        bytes: FF 15 F0 FF FF FF 49 00 00 00 66 00 69 00 90 52
+        (未识别为常见桩形式)
+  [5] <越界槽 5>            = 0x7FFA192C12F0   <<< 超出接口方法数，本不该被调用
+        MEM_COMMIT RX MEM_IMAGE region=0x5B0000
+        bytes: 48 83 EC 10 4C 8B D4 48 81 EC B0 00 00 00 48 89
+        (未识别为常见桩形式)
+  [6] <越界槽 6>            = 0xFFFFFFF015FF9090   <<< 超出接口方法数，本不该被调用
+        未映射 / 非规范地址
+        bytes: None
+        读不到内存
+
+==============================================================================
+接口 ActivateEx  (期望槽数 = 6: IUnknown 3 + 方法 3)
+QI hr = 0x00000000 , ptr = 0x226814afe20
+vtable @ 0x22699D809C8   [MEM_COMMIT RWX MEM_PRIVATE region=0x2000]
+
+  [0] QueryInterface     = 0x7FFA19297AF0
+        MEM_COMMIT RX MEM_IMAGE region=0x26000
+        bytes: 48 89 5C 24 08 48 89 74 24 10 57 48 83 EC 50 49
+        (未识别为常见桩形式)
+  [1] AddRef             = 0x7FFA191A88E0
+        MEM_COMMIT RX MEM_IMAGE region=0x115000
+        bytes: 40 53 48 83 EC 20 48 8B D9 E8 02 54 11 00 48 85
+        (未识别为常见桩形式)
+  [2] Release            = 0x7FFA191A8990
+        MEM_COMMIT RX MEM_IMAGE region=0x115000
+        bytes: 40 53 48 83 EC 20 48 8B D9 E8 52 53 11 00 48 85
+        (未识别为常见桩形式)
+  [3] Activate           = 0x22699D809F2
+        MEM_COMMIT RWX MEM_PRIVATE region=0x2000
+        bytes: FF 15 F0 FF FF FF 49 00 00 00 00 00 00 00 80 52
+        (未识别为常见桩形式)
+  [4] Deactivate         = 0x7FFA192C12F0
+        MEM_COMMIT RX MEM_IMAGE region=0x5B0000
+        bytes: 48 83 EC 10 4C 8B D4 48 81 EC B0 00 00 00 48 89
+        (未识别为常见桩形式)
+  [5] ActivateEx         = 0xFFFFFFF015FF9090
+        未映射 / 非规范地址
+        bytes: None
+        读不到内存
+  [6] <越界槽 6>            = 0x49   <<< 超出接口方法数，本不该被调用
+        MEM_FREE NOACCESS 0x0 region=0x7FFE0000
+        bytes: None
+        读不到内存
+  [7] <越界槽 7>            = 0x7FF9B99D5280   <<< 超出接口方法数，本不该被调用
+        MEM_COMMIT RW MEM_PRIVATE region=0x1000
+        bytes: 81 C0 06 20 04 00 00 00 82 C0 07 20 05 00 00 00
+        (未识别为常见桩形式)
+
+==============================================================================
+接口 {AA80E7F5-2021-11D2-93E0-0060B067B86E}  (期望槽数 = 9: IUnknown 3 + 方法 6)
+QI hr = 0x00000000 , ptr = 0x226814afd30
+vtable @ 0x22699D80B68   [MEM_COMMIT RWX MEM_PRIVATE region=0x2000]
+
+  [0] QueryInterface     = 0x7FFA19297AF0
+        MEM_COMMIT RX MEM_IMAGE region=0x26000
+        bytes: 48 89 5C 24 08 48 89 74 24 10 57 48 83 EC 50 49
+        (未识别为常见桩形式)
+  [1] AddRef             = 0x7FFA191A88E0
+        MEM_COMMIT RX MEM_IMAGE region=0x115000
+        bytes: 40 53 48 83 EC 20 48 8B D9 E8 02 54 11 00 48 85
+        (未识别为常见桩形式)
+  [2] Release            = 0x7FFA191A8990
+        MEM_COMMIT RX MEM_IMAGE region=0x115000
+        bytes: 40 53 48 83 EC 20 48 8B D9 E8 52 53 11 00 48 85
+        (未识别为常见桩形式)
+  [3] OnSetFocus         = 0x22699D80BBA
+        MEM_COMMIT RWX MEM_PRIVATE region=0x2000
+        bytes: FF 15 F0 FF FF FF 49 00 00 00 26 02 00 00 98 52
+        (未识别为常见桩形式)
+  [4] OnTestKeyDown      = 0x22699D80BF2
+        MEM_COMMIT RWX MEM_PRIVATE region=0x2000
+        bytes: FF 15 F0 FF FF FF 49 00 00 00 06 00 00 00 A0 52
+        (未识别为常见桩形式)
+  [5] OnTestKeyUp        = 0x22699D80C2A
+        MEM_COMMIT RWX MEM_PRIVATE region=0x2000
+        bytes: FF 15 F0 FF FF FF 49 00 00 00 26 02 00 00 B8 52
+        (未识别为常见桩形式)
+  [6] OnKeyDown          = 0x22699D80C62
+        MEM_COMMIT RWX MEM_PRIVATE region=0x2000
+        bytes: FF 15 F0 FF FF FF 49 00 00 00 06 00 00 00 A8 52
+        (未识别为常见桩形式)
+  [7] OnKeyUp            = 0x22699D80C9A
+        MEM_COMMIT RWX MEM_PRIVATE region=0x2000
+        bytes: FF 15 F0 FF FF FF 49 00 00 00 26 02 00 00 B0 52
+        (未识别为常见桩形式)
+  [8] OnPreservedKey     = 0x22699D80CD2
+        MEM_COMMIT RWX MEM_PRIVATE region=0x2000
+        bytes: FF 15 F0 FF FF FF 49 00 00 00 06 00 00 00 C0 52
+        (未识别为常见桩形式)
+  [9] <越界槽 9>            = 0x7FFA192C12F0   <<< 超出接口方法数，本不该被调用
+        MEM_COMMIT RX MEM_IMAGE region=0x5B0000
+        bytes: 48 83 EC 10 4C 8B D4 48 81 EC B0 00 00 00 48 89
+        (未识别为常见桩形式)
+  [10] <越界槽 10>           = 0xFFFFFFF015FF9090   <<< 超出接口方法数，本不该被调用
+        未映射 / 非规范地址
+        bytes: None
+        读不到内存
+
+==============================================================================
+判读要点
+  - 如果槽位指向的地址是 MEM_FREE 或非规范地址 -> 该槽从未被 CLR 填过 -> 调用必崩
+  - 如果槽位指向的字节不是任何跳转桩 -> 可能是数据而非代码
+  - 关键对比：IE 的槽 3/4 应当与 IB 的槽 3/4 行为一致（同一个 Activate/Deactivate）

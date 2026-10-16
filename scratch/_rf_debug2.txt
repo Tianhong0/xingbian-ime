@@ -1,0 +1,4 @@
+stats: {'common_chars': 2, 'radicals': 38}
+你 in: False  尔 in: False  亻 in: False
+len accept: 40
+module file: D:\Documents\deepseek-harness\default-workspace\xingbian-ime\tools\build_dict.py

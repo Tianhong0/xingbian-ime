@@ -1,0 +1,40 @@
+================ Xingbian IME 端到端 harness ================
+时间: 2026-10-16 18:19:53
+进程: PID=19736 线程=1 ApartmentState=STA
+os: Microsoft Windows NT 6.2.9200.0 / CLR 4.0.30319.42000
+[env] 启动时先松开所有修饰键: SendInput 松开 6 个修饰键 → 返回 6 ; 修饰键清理：清前 Ctrl=0x0000 Alt=0x0000 Shift=0x0000（干净） → 清后 Ctrl=0x0000 Alt=0x0000
+
+[env] XINGBIAN_DICT=D:\Documents\deepseek-harness\default-workspace\xingbian-ime\assets\build\xingbian.bin
+[env] 词典文件存在=True 大小=4376418
+[engine] TextService.Warmup -> True  error=(null)
+[engine] TextService.EngineError=(null)
+[engine] XingbianEngine.CreateDefault() -> DictPath=D:\Documents\deepseek-harness\default-workspace\xingbian-ime\assets\build\xingbian.bin
+[sut] typeof(TextService).GetInterfaces() = ITfTextInputProcessor, ITfTextInputProcessorEx, ITfKeyEventSink, ITfThreadMgrEventSink, ITfEditSession
+
+[host] 隐藏宿主窗口 hwnd=0x49092A
+[tsf] TF_GetThreadMgr -> hr=0x80004005 ptim=null
+[tsf] TF_CreateThreadMgr -> hr=0x00000000 ptim=OK
+[tsf] ITfThreadMgr 实例=System.__ComObject
+[tsf] ITfThreadMgr::Activate -> hr=0x00000000 tid=32
+
+[sut] new TextService() + ActivateEx(tid=32) -> hr=0x00000000
+[sut] 说明：每个用例都会通过 NewRig() 另起一个全新实例，实例之间不共享模式/缓冲区状态。
+
+
+================ 汇总 ================
+  [PASS] 用例6 空缓冲区（ActivateEx 之后立即）SPACE / RETURN / BACK 全部 eaten=false  三个功能键都没被吞
+  [PASS] 用例1 主链路 n i m a + 空格 → 假存储文本 == "亻尔 女马"  文本精确匹配
+  [PASS] 用例2 四个字母 n i m a 每个 OnTestKeyDown 都返回 eaten=true  四个字母全部被吞
+  [PASS] 用例3 候选排序：nima+1 应等于"亻尔 女马"，nima+2 应不同  1号候选=匹配 ; 2号候选与1号候选不同
+  [PASS] 用例4 Esc 取消：nima+Esc 后存储仍为空，且随后空格不被吞  存储为空=True ; 空格不被吞=True
+  [PASS] 用例5 Backspace：nima+BS×2 → 空格上屏应为"亻尔"；n+BS 后空格不被吞  nima+BS×2+空格="亻尔"(匹配预期) ; n+BS 后空格不被吞=True
+  [PASS] 用例7 Ctrl / Alt 按下时 N 必须 eaten=false  基线被吞=True ; Ctrl 不吞（SetKeyboardState） ; Alt 不吞（SetKeyboardState）
+  [PASS] 用例8 单击 Shift（OnTestKeyUp→OnKeyUp）切换中/英模式  中文=True → 切换后英文=True → 再切回中文=True
+  [PASS] 用例9 候选浮窗 CandidatePanel 全程参与不崩 + 截屏 panel.png  面板正常，已截屏
+  [PASS] 用例10 OnKeyDown(pic=null) / OnTestKeyDown(pic=null) 必须返回 S_OK 且不抛异常  无异常逃逸，hr 均为 S_OK (0x00000000 / 0x00000000)
+  [PASS] 实验A RequestLock 模型 A（同步授权：RequestLock 内回调 OnLockGranted）  链路跑通，文本正确
+  [EXPECTED-FAIL] 实验B RequestLock 模型 B（延迟授权：*phrSession=TS_S_ASYNC，宿主稍后自己回调 OnLockGranted）  如预期：模型 B 无法把文本写进存储
+  [PASS] 附加 ITfTextInputProcessor::Activate 入口（而非 ActivateEx）  Activate 入口同样可用
+
+PASS=12 FAIL=0 SKIP=0 （另有对照实验 1 条，按设计预期失败，不计入 FAIL）
+[sut] 18 个 TextService 实例全部 Deactivate() 正常返回

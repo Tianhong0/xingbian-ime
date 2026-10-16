@@ -1,0 +1,8 @@
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\typetest\obj\Release\TypeTest.csproj.AssemblyReference.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\typetest\obj\Release\TypeTest.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\typetest\obj\Release\TypeTest.csproj.CoreCompileInputs.cache
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\typetest\bin\Release\TypeTest.exe.config
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\typetest\bin\Release\TypeTest.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\typetest\bin\Release\TypeTest.pdb
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\typetest\obj\Release\TypeTest.exe
+D:\Documents\deepseek-harness\default-workspace\xingbian-ime\scratch\typetest\obj\Release\TypeTest.pdb

@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = Xingbian.Cli
+build_property.ProjectDir = D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Cli\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

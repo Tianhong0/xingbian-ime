@@ -1,0 +1,88 @@
+﻿
+形变输入法 (xingbian-ime) 注册脚本
+  路线        : HKLM（默认，需要管理员）
+  安装目录    : C:\Program Files\XingbianIME
+  构建产物目录: D:\Documents\deepseek-harness\default-workspace\xingbian-ime\src\Xingbian.Tsf\bin\Release
+  词典        : D:\Documents\deepseek-harness\default-workspace\xingbian-ime\assets\build\xingbian.bin
+  CLSID       : {7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}
+  ProfileGUID : {B3F2C8D1-6A47-4C09-8E52-1D7A9F0B4C65}
+  语言配置键  : 0x00000804
+  语言列表串  : 0804:{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}{B3F2C8D1-6A47-4C09-8E52-1D7A9F0B4C65}
+
+== 1/5 复制文件 —— 已指定 -SkipCopy，跳过
+
+== 2/5 清理旧的 CLSID / TIP 注册
+  [清理] HKLM\SOFTWARE\Classes\CLSID\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}
+  [清理] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}
+
+== 3/5 写 COM 注册（CLSID + InprocServer32）
+  [OK] HKLM\SOFTWARE\Classes\CLSID\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}  (默认值) = 形变输入法
+  [OK] HKLM\SOFTWARE\Classes\CLSID\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\InprocServer32  (默认值) = C:\Windows\System32\m
+scoree.dll
+  [OK] HKLM\SOFTWARE\Classes\CLSID\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\InprocServer32  [ThreadingModel] = Both
+  [OK] HKLM\SOFTWARE\Classes\CLSID\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\InprocServer32  [Assembly] = Xingbian.Tsf, Ve
+rsion=0.1.0.0, Culture=neutral, PublicKeyToken=null
+  [OK] HKLM\SOFTWARE\Classes\CLSID\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\InprocServer32  [Class] = Xingbian.Tsf.TextSe
+rvice
+  [OK] HKLM\SOFTWARE\Classes\CLSID\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\InprocServer32  [RuntimeVersion] = v4.0.30319
+  [OK] HKLM\SOFTWARE\Classes\CLSID\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\InprocServer32  [CodeBase] = file:///C:/Progr
+am Files/XingbianIME/Xingbian.Tsf.dll
+
+== 4/5 写 TSF 注册（LanguageProfile + 4 个 Category）
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\LanguageProfile\0x00000804\{B3F2C8D1-6A47
+-4C09-8E52-1D7A9F0B4C65}  (默认值) = 形变输入法
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\LanguageProfile\0x00000804\{B3F2C8D1-6A47
+-4C09-8E52-1D7A9F0B4C65}  [Description] = 形变输入法
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\LanguageProfile\0x00000804\{B3F2C8D1-6A47
+-4C09-8E52-1D7A9F0B4C65}  [Display Description] = 形变输入法
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\LanguageProfile\0x00000804\{B3F2C8D1-6A47
+-4C09-8E52-1D7A9F0B4C65}  [IconFile] = C:\Program Files\XingbianIME\Xingbian.Tsf.dll
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\LanguageProfile\0x00000804\{B3F2C8D1-6A47
+-4C09-8E52-1D7A9F0B4C65}  [IconIndex] = 0
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\LanguageProfile\0x00000804\{B3F2C8D1-6A47
+-4C09-8E52-1D7A9F0B4C65}  [Enable] = 1
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\Category\Category\{34745C63-B2F0-4784-8B6
+7-5E12C8701A31}\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}   (空键)
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\Category\Item\{7C4E1A9B-3D2F-4E58-9A61-0F
+8B5C7D2E43}\{34745C63-B2F0-4784-8B67-5E12C8701A31}   (空键)
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\Category\Category\{49D2F9CE-1F5E-11D7-A6D
+3-00065B84435C}\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}   (空键)
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\Category\Item\{7C4E1A9B-3D2F-4E58-9A61-0F
+8B5C7D2E43}\{49D2F9CE-1F5E-11D7-A6D3-00065B84435C}   (空键)
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\Category\Category\{13A016DF-560B-46CD-947
+A-4C3AF1E0E35D}\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}   (空键)
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\Category\Item\{7C4E1A9B-3D2F-4E58-9A61-0F
+8B5C7D2E43}\{13A016DF-560B-46CD-947A-4C3AF1E0E35D}   (空键)
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\Category\Category\{25504FB4-7BAB-4BC1-9C6
+9-CF81890F0EF5}\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}   (空键)
+  [OK] HKLM\SOFTWARE\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\Category\Item\{7C4E1A9B-3D2F-4E58-9A61-0F
+8B5C7D2E43}\{25504FB4-7BAB-4BC1-9C69-CF81890F0EF5}   (空键)
+
+== 5/5 写 HKCU 用户级项（启用位 + 词典路径）
+  [OK] HKCU\Software\Microsoft\CTF\TIP\{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}\LanguageProfile\0x00000804\{B3F2C8D1-6A47
+-4C09-8E52-1D7A9F0B4C65}  [Enable] = 1
+  [OK] HKCU\Software\XingbianIME  [DictPath] = C:\Program Files\XingbianIME\dict\xingbian.bin
+
+所有注册表项均已回读校验通过。
+  [OK] input.dll!InstallLayoutOrTip 成功：0804:{7C4E1A9B-3D2F-4E58-9A61-0F8B5C7D2E43}{B3F2C8D1-6A47-4C09-8E52-1D7A9F0B4C65
+}  (flags=ILOT_INSTALL=0x00000000)
+
+========================================
+ 形变输入法注册完成
+========================================
+
+接下来请手动做这几步：
+
+  1) 让 TSF 重新加载（二选一）
+     · 最稳妥：注销并重新登录（或重启）
+     · 快一点：重启 ctfmon.exe（系统会自动把它拉起来），在 PowerShell 里执行
+           Stop-Process -Name ctfmon -Force -ErrorAction SilentlyContinue
+
+  2) 按 Win + 空格 切换输入法，列表里应该能看到「形变输入法」
+
+  3) 打开记事本，敲 nima，应弹出候选窗；按空格上屏得到：亻尔 女马
+
+  中英文切换：单击 Shift
+
+  卸载：右键以管理员身份运行 uninstall.cmd
+
